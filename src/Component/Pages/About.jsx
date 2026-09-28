@@ -10,7 +10,7 @@ const About = () => {
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1px] h-full bg-primary/5"></div>
       <div className="absolute top-1/2 left-0 w-full h-[1px] -translate-y-1/2 bg-primary/5"></div>
 
-      <div className="max-w-[90rem] mx-auto px-6 md:px-12 relative z-10">
+      <div className="max-w-[95rem] mx-auto px-4 sm:px-8 lg:px-12 relative z-10">
         
         <div className="flex flex-col lg:flex-row items-center justify-between gap-16 lg:gap-12">
           

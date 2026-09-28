@@ -39,7 +39,7 @@ const InteractiveGallery = () => {
 
   return (
     <section className="py-24 bg-surface text-text w-full">
-      <div className="max-w-[100rem] mx-auto px-6 lg:px-12">
+      <div className="max-w-[95rem] mx-auto px-4 sm:px-8 lg:px-12">
         {/* Section Header */}
         <div className="flex flex-col items-center mb-16 text-center">
           <div className="flex items-center space-x-4 mb-6">

@@ -41,7 +41,7 @@ const EditorialGallery = () => {
     <section className="relative w-full bg-surface py-32 px-4 md:px-8 lg:px-12">
       
       {/* Header */}
-      <div className="max-w-[100rem] mx-auto mb-16 flex flex-col md:flex-row justify-between items-end">
+      <div className="max-w-[95rem] mx-auto px-4 sm:px-8 lg:px-12 mb-16 flex flex-col md:flex-row justify-between items-end">
         <div>
           <div className="flex items-center space-x-4 mb-4">
             <span className="w-8 h-[1px] bg-accent"></span>
@@ -59,7 +59,7 @@ const EditorialGallery = () => {
       </div>
 
       {/* CSS Grid Editorial Layout */}
-      <div className="max-w-[100rem] mx-auto grid grid-cols-12 gap-4 md:gap-6 lg:gap-8 auto-rows-fr">
+      <div className="max-w-[95rem] mx-auto px-4 sm:px-8 lg:px-12 grid grid-cols-12 gap-4 md:gap-6 lg:gap-8 auto-rows-fr">
         {galleryItems.map((item) => {
           const isHovered = hoveredId === item.id;
           const isAnotherHovered = hoveredId !== null && hoveredId !== item.id;

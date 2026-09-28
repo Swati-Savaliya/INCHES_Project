@@ -39,7 +39,7 @@ const Expertise = () => {
     <section id="expertise" className="relative w-full bg-surface text-primary py-24 overflow-hidden">
 
       {/* Header */}
-      <div className="max-w-[90rem] mx-auto px-6 md:px-12 mb-16">
+      <div className="max-w-[95rem] mx-auto px-4 sm:px-8 lg:px-12 mb-16">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -61,7 +61,7 @@ const Expertise = () => {
       </div>
 
       {/* Expanding Accordion Gallery */}
-      <div className="max-w-[95rem] mx-auto px-4 md:px-8">
+      <div className="max-w-[95rem] mx-auto px-4 sm:px-8 lg:px-12">
         <div className="flex flex-col lg:flex-row h-[70vh] lg:h-[75vh] gap-2 lg:gap-4 w-full">
 
           {services.map((service, index) => {

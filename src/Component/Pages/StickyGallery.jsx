@@ -69,7 +69,7 @@ const StickyGallery = () => {
 
   return (
     <section ref={containerRef} id="featured-projects" className="relative w-full bg-[#1A1A1A] text-white">
-      <div className="flex flex-col lg:flex-row w-full max-w-[100rem] mx-auto">
+      <div className="flex flex-col lg:flex-row w-full max-w-[95rem] mx-auto px-4 sm:px-8 lg:px-12">
         
         {/* LEFT SIDE: Sticky Image Container (Hidden on mobile, visible on lg screens) */}
         <div className="hidden lg:block lg:w-1/2 h-screen sticky top-0 p-12 lg:p-20 overflow-hidden">

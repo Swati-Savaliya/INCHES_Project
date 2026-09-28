@@ -6,16 +6,15 @@ import About from './Component/Pages/About'
 import Expertise from './Component/Pages/Expertise'
 import Transformation from './Component/Pages/Transformation'
 import TextMaskReveal from './Component/Pages/TextMaskReveal'
-
+import Gallery from './Component/Pages/Gallery'
+import InteractiveStudioVisualizer from './Component/Pages/InteractiveStudioVisualizer'
+import BespokeEstimator from './Component/Pages/BespokeEstimator'
 
 import './App.css'
 
 function App() {
   useEffect(() => {
-    // Scroll to top on page load
     window.scrollTo(0, 0);
-    
-    // Fallback for some browsers that preserve scroll position
     if ('scrollRestoration' in history) {
       history.scrollRestoration = 'manual';
     }
@@ -30,6 +29,9 @@ function App() {
       <Expertise />
       <Transformation />
       <TextMaskReveal />
+      <Gallery />
+      <InteractiveStudioVisualizer />
+      <BespokeEstimator />
     </div>
   )
 }

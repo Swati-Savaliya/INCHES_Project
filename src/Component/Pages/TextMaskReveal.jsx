@@ -39,23 +39,25 @@ const TextMaskReveal = () => {
       </div>
 
       {/* Foreground Content (Optional elegant typography outside the mask) */}
-      <div className="absolute bottom-12 left-0 w-full flex justify-between px-12 z-20 pointer-events-none">
-        <div className="flex flex-col">
-          <span className="font-sans text-xs tracking-[0.3em] uppercase text-primary font-bold mb-1">
-            Redefining Space
-          </span>
-          <span className="font-serif text-sm italic text-primary/60">
-            Crafting timeless environments.
-          </span>
-        </div>
-        
-        <div className="hidden md:flex flex-col text-right">
-          <span className="font-sans text-xs tracking-[0.3em] uppercase text-primary font-bold mb-1">
-            Est. 2024
-          </span>
-          <span className="font-serif text-sm italic text-primary/60">
-            Surat, Gujarat
-          </span>
+      <div className="absolute bottom-12 left-0 w-full z-20 pointer-events-none">
+        <div className="max-w-[95rem] mx-auto w-full flex justify-between px-4 sm:px-8 lg:px-12">
+          <div className="flex flex-col">
+            <span className="font-sans text-xs tracking-[0.3em] uppercase text-primary font-bold mb-1">
+              Redefining Space
+            </span>
+            <span className="font-serif text-sm italic text-primary/60">
+              Crafting timeless environments.
+            </span>
+          </div>
+          
+          <div className="hidden md:flex flex-col text-right">
+            <span className="font-sans text-xs tracking-[0.3em] uppercase text-primary font-bold mb-1">
+              Est. 2024
+            </span>
+            <span className="font-serif text-sm italic text-primary/60">
+              Surat, Gujarat
+            </span>
+          </div>
         </div>
       </div>
 

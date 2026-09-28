@@ -35,7 +35,7 @@ const StackingProcess = () => {
     <section id="process" className="relative w-full bg-surface pb-32">
       
       {/* Section Header */}
-      <div className="pt-24 pb-12 max-w-[90rem] mx-auto px-6 md:px-12 text-center">
+      <div className="pt-24 pb-12 max-w-[95rem] mx-auto px-4 sm:px-8 lg:px-12 text-center">
         <div className="flex items-center justify-center space-x-4 mb-4 md:mb-6">
           <span className="w-8 h-[1px] bg-accent"></span>
           <span className="font-sans text-[0.65rem] tracking-[0.4em] text-accent uppercase font-bold">
@@ -49,7 +49,7 @@ const StackingProcess = () => {
       </div>
 
       {/* Stacking Cards Container */}
-      <div className="w-full max-w-[85rem] mx-auto px-4 md:px-8 relative">
+      <div className="w-full max-w-[95rem] mx-auto px-4 sm:px-8 lg:px-12 relative">
         {steps.map((step, index) => (
           <div 
             key={step.id}

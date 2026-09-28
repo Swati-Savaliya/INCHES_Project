@@ -19,10 +19,11 @@ const Header = () => {
 
     const navLinks = [
         { name: 'Home', href: '#' },
-        { name: 'About', href: '#' },
-        { name: 'Services', href: '#' },
-        { name: 'Portfolio', href: '#' },
-        { name: 'Contact', href: '#' },
+        { name: 'Philosophy', href: '#about' },
+        { name: 'Expertise', href: '#expertise' },
+        { name: 'Gallery', href: '#gallery' },
+        { name: 'Reviews', href: '#testimonials' },
+        { name: 'Contact', href: '#contact' },
     ];
 
     return (
@@ -33,7 +34,7 @@ const Header = () => {
             {/* Top thin line for extra elegance */}
             <div className="absolute top-0 left-0 w-full h-[1px] bg-accent/20"></div>
 
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+            <div className="max-w-[95rem] mx-auto px-4 sm:px-8 lg:px-12">
                 <div className="flex justify-between items-center h-20">
 
                     {/* Logo Section */}

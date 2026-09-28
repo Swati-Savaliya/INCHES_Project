@@ -30,7 +30,7 @@ const Transformation = () => {
   return (
     <section id="transformation" className="w-full bg-[#111] text-surface py-8 md:py-10 overflow-hidden">
       
-      <div className="max-w-[90rem] mx-auto px-6 md:px-12 mb-8 md:mb-10 text-center">
+      <div className="max-w-[95rem] mx-auto px-4 sm:px-8 lg:px-12 mb-8 md:mb-10 text-center">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -53,7 +53,7 @@ const Transformation = () => {
         </motion.div>
       </div>
 
-      <div className="max-w-[80rem] mx-auto px-4 md:px-8">
+      <div className="max-w-[95rem] mx-auto px-4 sm:px-8 lg:px-12">
         <div 
           ref={containerRef}
           className="relative w-full aspect-video md:aspect-[21/9] lg:h-[40vh] cursor-ew-resize overflow-hidden rounded-sm"
