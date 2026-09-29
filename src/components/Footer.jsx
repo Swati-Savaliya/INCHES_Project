@@ -8,15 +8,15 @@ const Footer = () => {
 
   return (
     <footer className="w-full bg-[#0a0a0a] text-white pt-20 pb-12 px-4 sm:px-8 lg:px-12 border-t border-white/10 relative overflow-hidden">
-      
+
       {/* Ambient background glow */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-accent/5 rounded-full blur-[140px] pointer-events-none" />
 
       <div className="max-w-[95rem] mx-auto relative z-10">
-        
+
         {/* Main Footer Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 pb-16 border-b border-white/10">
-          
+
           {/* Brand Info (4 Cols) */}
           <div className="lg:col-span-4 flex flex-col justify-between">
             <div>
@@ -160,7 +160,7 @@ const Footer = () => {
         {/* Bottom Credits Bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 font-sans text-xs text-surface/40">
           <p>© {new Date().getFullYear()} INCHES Interiors. All rights reserved.</p>
-          
+
           <button
             onClick={scrollToTop}
             className="hover:text-accent transition-colors flex items-center gap-1.5 cursor-pointer"

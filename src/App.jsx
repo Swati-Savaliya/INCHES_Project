@@ -1,16 +1,17 @@
 import React, { useEffect } from 'react';
-import IntroCurtain from './Component/Pages/IntroCurtain'
-import Header from './Component/Header'
-import Hero from './Component/Pages/Hero'
-import About from './Component/Pages/About'
-import Expertise from './Component/Pages/Expertise'
-import Transformation from './Component/Pages/Transformation'
-import TextMaskReveal from './Component/Pages/TextMaskReveal'
-import Gallery from './Component/Pages/Gallery'
-import InteractiveStudioVisualizer from './Component/Pages/InteractiveStudioVisualizer'
-import BespokeEstimator from './Component/Pages/BespokeEstimator'
-import Testimonials from './Component/Pages/Testimonials'
-import Footer from './Component/Pages/Footer'
+import IntroCurtain from './pages/IntroCurtain';
+import Header from './components/Header';
+import Hero from './pages/Hero';
+import About from './pages/About';
+import Expertise from './pages/Expertise';
+import Transformation from './pages/Transformation';
+import TextMaskReveal from './pages/TextMaskReveal';
+import Gallery from './pages/Gallery';
+import InteractiveStudioVisualizer from './pages/InteractiveStudioVisualizer';
+import BespokeEstimator from './pages/BespokeEstimator';
+import Testimonials from './pages/Testimonials';
+import Footer from './components/Footer';
+
 
 import './App.css'
 function App() {
