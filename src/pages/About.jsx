@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 const About = () => {
@@ -38,12 +39,18 @@ const About = () => {
               We design homes, not just houses. Our approach is deeply sensory—focusing on the tactile feel of natural linen, the warmth of ambient lighting, and the quiet harmony of carefully curated materials.
             </p>
 
-            <div>
+            <div className="flex flex-col sm:flex-row items-center gap-4">
+              <Link 
+                to="/philosophy"
+                className="inline-block px-8 py-3 bg-primary text-[#EFECE6] font-sans text-xs tracking-[0.2em] uppercase hover:bg-accent transition-all duration-500 text-center"
+              >
+                Discover Our Philosophy
+              </Link>
               <a 
                 href="#contact"
-                className="inline-block px-8 py-3 border border-primary/20 text-primary font-sans text-xs tracking-[0.2em] uppercase hover:bg-primary hover:text-[#EFECE6] transition-all duration-500"
+                className="inline-block px-8 py-3 border border-primary/30 text-primary font-sans text-xs tracking-[0.2em] uppercase hover:bg-primary hover:text-[#EFECE6] transition-all duration-500 text-center"
               >
-                Begin Your Journey
+                Begin Journey
               </a>
             </div>
           </motion.div>

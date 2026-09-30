@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { ArrowUpRight, MapPin, Mail, MessageCircle } from 'lucide-react';
 
 const Footer = () => {
@@ -20,8 +21,8 @@ const Footer = () => {
           {/* Brand Info (4 Cols) */}
           <div className="lg:col-span-4 flex flex-col justify-between">
             <div>
-              <div className="flex items-center gap-3 mb-6">
-                <svg width="34" height="42" viewBox="0 0 40 50" className="text-accent">
+              <Link to="/" className="flex items-center gap-3 mb-6 group inline-flex">
+                <svg width="34" height="42" viewBox="0 0 40 50" className="text-accent group-hover:scale-105 transition-transform duration-300">
                   <path d="M5,50 L5,20 C5,10 15,5 25,5 C35,5 35,25 35,35 L35,50" fill="none" stroke="currentColor" strokeWidth="2" />
                   <circle cx="20" cy="18" r="4" fill="none" stroke="currentColor" strokeWidth="1.5" />
                   <line x1="20" y1="5" x2="20" y2="14" stroke="currentColor" strokeWidth="1.5" />
@@ -35,7 +36,7 @@ const Footer = () => {
                     Interiors &amp; Architecture
                   </span>
                 </div>
-              </div>
+              </Link>
 
               <p className="font-sans text-xs sm:text-sm text-surface/60 leading-relaxed max-w-sm mb-6">
                 Pioneering bespoke interior architecture and sensory spatial design. We sculpt living environments that blend tactile luxury with refined engineering.
@@ -110,22 +111,22 @@ const Footer = () => {
             </h4>
             <ul className="space-y-3 font-sans text-xs text-surface/70">
               <li>
-                <a href="#about" className="hover:text-accent transition-colors">Philosophy</a>
+                <Link to="/philosophy" className="hover:text-accent transition-colors">Philosophy</Link>
               </li>
               <li>
-                <a href="#expertise" className="hover:text-accent transition-colors">Expertise</a>
+                <a href="/#expertise" className="hover:text-accent transition-colors">Expertise</a>
               </li>
               <li>
-                <a href="#transformation" className="hover:text-accent transition-colors">Before &amp; After</a>
+                <a href="/#transformation" className="hover:text-accent transition-colors">Before &amp; After</a>
               </li>
               <li>
-                <a href="#gallery" className="hover:text-accent transition-colors">Portfolio</a>
+                <a href="/#gallery" className="hover:text-accent transition-colors">Portfolio</a>
               </li>
               <li>
-                <a href="#visualizer" className="hover:text-accent transition-colors">Studio Visualizer</a>
+                <a href="/#visualizer" className="hover:text-accent transition-colors">Studio Visualizer</a>
               </li>
               <li>
-                <a href="#consult" className="hover:text-accent transition-colors">Cost Estimator</a>
+                <a href="/#consult" className="hover:text-accent transition-colors">Cost Estimator</a>
               </li>
             </ul>
           </div>

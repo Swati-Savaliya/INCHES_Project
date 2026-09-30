@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const Header = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
+    const location = useLocation();
+    const navigate = useNavigate();
 
     // Handle scroll effect for sticky header
     useEffect(() => {
@@ -18,13 +21,30 @@ const Header = () => {
     }, []);
 
     const navLinks = [
-        { name: 'Home', href: '#' },
-        { name: 'Philosophy', href: '#about' },
-        { name: 'Expertise', href: '#expertise' },
-        { name: 'Gallery', href: '#gallery' },
-        { name: 'Reviews', href: '#testimonials' },
-        { name: 'Contact', href: '#contact' },
+        { name: 'Home', href: '/', isRoute: true },
+        { name: 'Philosophy', href: '/philosophy', isRoute: true },
+        { name: 'Expertise', href: '/#expertise', isRoute: false },
+        { name: 'Gallery', href: '/#gallery', isRoute: false },
+        { name: 'Reviews', href: '/#testimonials', isRoute: false },
+        { name: 'Contact', href: '/#contact', isRoute: false },
     ];
+
+    const handleRouteClick = (href) => {
+        setIsOpen(false);
+        if (href === '/' && location.pathname === '/') {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    };
+
+    const handleAnchorClick = (e, href, isRoute) => {
+        setIsOpen(false);
+        if (isRoute) return;
+
+        if (location.pathname !== '/') {
+            e.preventDefault();
+            navigate(href);
+        }
+    };
 
     return (
         <header
@@ -38,7 +58,11 @@ const Header = () => {
                 <div className="flex justify-between items-center h-20">
 
                     {/* Logo Section */}
-                    <div className="flex-shrink-0 flex items-center cursor-pointer group">
+                    <Link 
+                        to="/" 
+                        onClick={() => handleRouteClick('/')}
+                        className="flex-shrink-0 flex items-center cursor-pointer group"
+                    >
                         {/* Elegant SVG Graphic representing an interior arch/lamp */}
                         <svg width="40" height="50" viewBox="0 0 40 50" className="mr-3 transform group-hover:scale-105 transition-transform duration-500">
                             <path d="M5,50 L5,20 C5,10 15,5 25,5 C35,5 35,25 35,35 L35,50" fill="none" stroke="#8A6D54" strokeWidth="1.5" />
@@ -58,29 +82,48 @@ const Header = () => {
                                 <div className="w-12 h-[1px] bg-accent/60 ml-2"></div>
                             </div>
                         </div>
-                    </div>
+                    </Link>
 
                     {/* Desktop Navigation */}
                     <nav className="hidden lg:flex space-x-10 items-center">
-                        {navLinks.map((link) => (
-                            <a
-                                key={link.name}
-                                href={link.href}
-                                className="group relative text-primary font-sans text-xs tracking-[0.15em] uppercase px-2 py-2"
-                            >
-                                <span className="relative z-10 transition-colors duration-300 group-hover:text-accent">
-                                    {link.name}
-                                </span>
-                                {/* Minimalist dot indicator on hover */}
-                                <span className="absolute left-1/2 -bottom-1 w-1 h-1 bg-accent rounded-full opacity-0 transform -translate-x-1/2 translate-y-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0"></span>
-                            </a>
-                        ))}
+                        {navLinks.map((link) => {
+                            const isCurrent = link.isRoute && location.pathname === link.href;
+
+                            return link.isRoute ? (
+                                <Link
+                                    key={link.name}
+                                    to={link.href}
+                                    onClick={() => handleRouteClick(link.href)}
+                                    className={`group relative font-sans text-xs tracking-[0.15em] uppercase px-2 py-2 transition-colors duration-300 ${isCurrent ? 'text-accent font-semibold' : 'text-primary hover:text-accent'
+                                        }`}
+                                >
+                                    <span className="relative z-10">{link.name}</span>
+                                    <span
+                                        className={`absolute left-1/2 -bottom-1 w-1 h-1 bg-accent rounded-full transform -translate-x-1/2 transition-all duration-300 ${isCurrent ? 'opacity-100 translate-y-0 scale-125' : 'opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0'
+                                            }`}
+                                    />
+                                </Link>
+                            ) : (
+                                <a
+                                    key={link.name}
+                                    href={link.href}
+                                    onClick={(e) => handleAnchorClick(e, link.href, link.isRoute)}
+                                    className="group relative text-primary font-sans text-xs tracking-[0.15em] uppercase px-2 py-2"
+                                >
+                                    <span className="relative z-10 transition-colors duration-300 group-hover:text-accent">
+                                        {link.name}
+                                    </span>
+                                    <span className="absolute left-1/2 -bottom-1 w-1 h-1 bg-accent rounded-full opacity-0 transform -translate-x-1/2 translate-y-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0"></span>
+                                </a>
+                            );
+                        })}
                     </nav>
 
-                    {/* CTA Button & Search/Menu Icons */}
+                    {/* CTA Button */}
                     <div className="hidden lg:flex items-center space-x-8">
                         <a
-                            href="#consult"
+                            href="/#consult"
+                            onClick={(e) => handleAnchorClick(e, '/#consult', false)}
                             className="group flex items-center px-6 py-2.5 bg-transparent border border-primary text-primary hover:bg-primary hover:text-surface transition-all duration-500 font-sans text-[0.65rem] tracking-[0.25em] uppercase overflow-hidden relative"
                         >
                             <span className="relative z-10 flex items-center">
@@ -97,6 +140,7 @@ const Header = () => {
                         <button
                             onClick={() => setIsOpen(!isOpen)}
                             className="text-primary hover:text-accent focus:outline-none transition-colors"
+                            aria-label="Toggle Menu"
                         >
                             <svg className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 {isOpen ? (
@@ -117,20 +161,32 @@ const Header = () => {
             >
                 <div className="px-6 space-y-6 flex flex-col items-center">
                     {navLinks.map((link) => (
-                        <a
-                            key={link.name}
-                            href={link.href}
-                            className="block w-full text-center text-primary hover:text-accent font-sans text-xs tracking-[0.2em] uppercase transition-colors"
-                            onClick={() => setIsOpen(false)}
-                        >
-                            {link.name}
-                        </a>
+                        link.isRoute ? (
+                            <Link
+                                key={link.name}
+                                to={link.href}
+                                className={`block w-full text-center font-sans text-xs tracking-[0.2em] uppercase transition-colors ${location.pathname === link.href ? 'text-accent font-semibold' : 'text-primary hover:text-accent'
+                                    }`}
+                                onClick={() => handleRouteClick(link.href)}
+                            >
+                                {link.name}
+                            </Link>
+                        ) : (
+                            <a
+                                key={link.name}
+                                href={link.href}
+                                className="block w-full text-center text-primary hover:text-accent font-sans text-xs tracking-[0.2em] uppercase transition-colors"
+                                onClick={(e) => handleAnchorClick(e, link.href, link.isRoute)}
+                            >
+                                {link.name}
+                            </a>
+                        )
                     ))}
                     <div className="w-full pt-6 flex justify-center">
                         <a
-                            href="#consult"
+                            href="/#consult"
                             className="flex justify-center items-center w-3/4 px-8 py-4 border border-primary bg-primary text-surface transition-all duration-300 font-sans text-xs tracking-[0.2em] uppercase"
-                            onClick={() => setIsOpen(false)}
+                            onClick={(e) => handleAnchorClick(e, '/#consult', false)}
                         >
                             Consult Now
                             <svg className="w-4 h-4 ml-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -145,3 +201,4 @@ const Header = () => {
 };
 
 export default Header;
+

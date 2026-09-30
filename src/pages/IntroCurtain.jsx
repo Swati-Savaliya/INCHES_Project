@@ -1,57 +1,66 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
+// Module-level flag: resets to false on every full browser refresh / reload
+let hasPlayedInSession = false;
+
 const IntroCurtain = () => {
-  const [isVisible, setIsVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState(() => !hasPlayedInSession);
 
   useEffect(() => {
-    // Automatically hide the curtain container completely after the animation finishes (approx 3.5 seconds)
+    if (!isVisible) return;
+    hasPlayedInSession = true;
+
+    // Automatically hide the curtain container completely after the animation finishes (approx 3.2s)
     const timer = setTimeout(() => {
       setIsVisible(false);
-    }, 3500);
+    }, 3200);
+
     return () => clearTimeout(timer);
-  }, []);
+  }, [isVisible]);
+
+  if (!isVisible) return null;
 
   return (
     <AnimatePresence>
       {isVisible && (
-        <motion.div 
+        <motion.div
           className="fixed inset-0 z-[100] flex overflow-hidden pointer-events-none"
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.5 }}
         >
-          
+
           {/* Central Logo/Text that fades out first */}
-          <motion.div 
+          <motion.div
             className="absolute inset-0 flex items-center justify-center z-[110]"
             initial={{ opacity: 1, scale: 1 }}
             animate={{ opacity: 0, scale: 1.1 }}
-            transition={{ duration: 1, delay: 1, ease: "easeInOut" }}
+            transition={{ duration: 1, delay: 0.8, ease: "easeInOut" }}
           >
             <div className="flex flex-col items-center">
-               <h1 className="font-serif text-5xl md:text-7xl lg:text-[8rem] text-white tracking-[0.2em] uppercase drop-shadow-2xl">
-                 Inches
-               </h1>
-               <div className="flex items-center mt-4">
-                 <div className="w-12 h-[1px] bg-white/60 mr-4"></div>
-                 <span className="font-sans text-xs tracking-[0.4em] text-white uppercase font-light">
-                   Interiors
-                 </span>
-                 <div className="w-12 h-[1px] bg-white/60 ml-4"></div>
-               </div>
+              <h1 className="font-serif text-5xl md:text-7xl lg:text-[8rem] text-white tracking-[0.2em] uppercase drop-shadow-2xl">
+                Inches
+              </h1>
+              <div className="flex items-center mt-4">
+                <div className="w-12 h-[1px] bg-white/60 mr-4"></div>
+                <span className="font-sans text-xs tracking-[0.4em] text-white uppercase font-light">
+                  Interiors
+                </span>
+                <div className="w-12 h-[1px] bg-white/60 ml-4"></div>
+              </div>
             </div>
           </motion.div>
 
           {/* LEFT CURTAIN */}
-          <motion.div 
+          <motion.div
             className="relative w-1/2 h-full bg-white z-[105] shadow-[20px_0_50px_rgba(0,0,0,0.6)] origin-left overflow-hidden"
             initial={{ x: "0%" }}
             animate={{ x: "-100%" }}
-            transition={{ duration: 1.8, delay: 1.5, ease: [0.7, 0, 0.3, 1] }}
+            transition={{ duration: 1.8, delay: 1.3, ease: [0.7, 0, 0.3, 1] }}
           >
             {/* Custom Curtain Image */}
-            <img 
+            <img
               src="/latest-curtain.jpg"
               alt="Custom Curtain"
               className="absolute inset-0 w-full h-full object-cover"
@@ -65,18 +74,18 @@ const IntroCurtain = () => {
           </motion.div>
 
           {/* RIGHT CURTAIN */}
-          <motion.div 
+          <motion.div
             className="relative w-1/2 h-full bg-white z-[105] shadow-[-20px_0_50px_rgba(0,0,0,0.6)] origin-right overflow-hidden"
             initial={{ x: "0%" }}
             animate={{ x: "100%" }}
-            transition={{ duration: 1.8, delay: 1.5, ease: [0.7, 0, 0.3, 1] }}
+            transition={{ duration: 1.8, delay: 1.3, ease: [0.7, 0, 0.3, 1] }}
           >
             {/* Custom Curtain Image */}
-            <img 
+            <img
               src="/latest-curtain.jpg"
               alt="Custom Curtain"
               className="absolute inset-0 w-full h-full object-cover"
-              style={{ transform: 'scaleX(-1)', objectPosition: 'left center' }} 
+              style={{ transform: 'scaleX(-1)', objectPosition: 'left center' }}
             />
 
             {/* Edge Shadow / Hemming */}
@@ -90,3 +99,4 @@ const IntroCurtain = () => {
 };
 
 export default IntroCurtain;
+
