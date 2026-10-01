@@ -24,7 +24,7 @@ const Header = () => {
         { name: 'Home', href: '/', isRoute: true },
         { name: 'Philosophy', href: '/philosophy', isRoute: true },
         { name: 'Expertise', href: '/expertise', isRoute: true },
-        { name: 'Gallery', href: '/#gallery', isRoute: false },
+        { name: 'Gallery', href: '/gallery', isRoute: true },
         { name: 'Reviews', href: '/#testimonials', isRoute: false },
         { name: 'Contact', href: '/#contact', isRoute: false },
     ];

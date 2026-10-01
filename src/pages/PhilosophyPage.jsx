@@ -242,183 +242,187 @@ const PhilosophyPage = () => {
 
         {/* ===================== MAIN 3D MULTI-PLANE CONTENT OVERLAY ===================== */}
         <div
-          className="relative z-20 w-full px-6 sm:px-12 lg:px-16 flex-1 flex items-center justify-between"
+          className="relative z-20 w-full px-4 sm:px-8 lg:px-12 flex-1 flex items-center"
           style={{ perspective: '1200px' }}
         >
-          {/* Left Text Block */}
-          <div className="max-w-2xl">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeBanner.id}
-                variants={textVariants3D}
-                initial="hidden"
-                animate="visible"
-                exit="exit"
-                animateTransform={{
-                  rotateX: -mousePos.y * 10,
-                  rotateY: mousePos.x * 10
-                }}
-                className="transform-gpu"
-                style={{ transformStyle: 'preserve-3d' }}
-              >
-
-                {/* Category Pill with 3D Float */}
+          <div className="max-w-[94rem] mx-auto w-full flex items-center justify-between">
+            {/* Left Text Block */}
+            <div className="max-w-2xl">
+              <AnimatePresence mode="wait">
                 <motion.div
-                  style={{ transform: 'translateZ(40px)' }}
-                  className="flex items-center gap-2 mb-2 sm:mb-3"
+                  key={activeBanner.id}
+                  variants={textVariants3D}
+                  initial="hidden"
+                  animate="visible"
+                  exit="exit"
+                  animateTransform={{
+                    rotateX: -mousePos.y * 10,
+                    rotateY: mousePos.x * 10
+                  }}
+                  className="transform-gpu"
+                  style={{ transformStyle: 'preserve-3d' }}
                 >
-                  <span className="w-5 h-[1.5px] bg-accent" />
-                  <span className="font-sans text-[0.62rem] sm:text-xs tracking-[0.3em] text-accent uppercase font-bold drop-shadow-sm">
-                    {activeBanner.category}
-                  </span>
-                  <span className="font-mono text-[0.65rem] text-white/50 ml-1">
-                    [{activeBanner.number}/04]
-                  </span>
-                </motion.div>
 
-                {/* Main Headline with High 3D Depth */}
-                <motion.h1
-                  style={{ transform: 'translateZ(65px)' }}
-                  className="font-serif text-2xl sm:text-4xl md:text-5xl text-white leading-[1.12] tracking-tight mb-3 drop-shadow-[0_8px_25px_rgba(0,0,0,0.9)]"
-                >
-                  {activeBanner.title.split(' ').slice(0, -2).join(' ')}{' '}
-                  <span className="italic font-light text-accent font-serif">
-                    {activeBanner.title.split(' ').slice(-2).join(' ')}
-                  </span>
-                </motion.h1>
-
-                {/* Brief Description */}
-                <motion.p
-                  style={{ transform: 'translateZ(45px)' }}
-                  className="font-sans text-xs sm:text-sm md:text-[0.92rem] text-surface/85 leading-relaxed max-w-lg mb-6 font-normal drop-shadow-[0_4px_16px_rgba(0,0,0,0.85)]"
-                >
-                  {activeBanner.desc}
-                </motion.p>
-
-                {/* Action Row - 3D Popout CTA */}
-                <motion.div
-                  style={{ transform: 'translateZ(80px)' }}
-                  className="flex flex-wrap items-center gap-3"
-                >
-                  <a
-                    href="https://wa.me/919702763876?text=Hello%20INCHES%20Studio,%20I%20am%20exploring%20your%20Philosophy%20and%20would%20like%20to%20consult%20for%20my%20residence."
-                    target="_blank"
-                    rel="noreferrer"
-                    className="px-7 py-3 bg-accent hover:bg-accent/90 text-white font-sans text-xs tracking-[0.2em] uppercase font-bold rounded-xl shadow-[0_10px_30px_rgba(138,109,84,0.4)] hover:shadow-[0_15px_40px_rgba(138,109,84,0.6)] transition-all flex items-center gap-2 cursor-pointer hover:scale-105 active:scale-95"
+                  {/* Category Pill with 3D Float */}
+                  <motion.div
+                    style={{ transform: 'translateZ(40px)' }}
+                    className="flex items-center gap-2 mb-2 sm:mb-3"
                   >
-                    <span>Consult Studio</span>
-                    <ArrowUpRight className="w-3.5 h-3.5" />
-                  </a>
+                    <span className="w-5 h-[1.5px] bg-accent" />
+                    <span className="font-sans text-[0.62rem] sm:text-xs tracking-[0.3em] text-accent uppercase font-bold drop-shadow-sm">
+                      {activeBanner.category}
+                    </span>
+                    <span className="font-mono text-[0.65rem] text-white/50 ml-1">
+                      [{activeBanner.number}/04]
+                    </span>
+                  </motion.div>
+
+                  {/* Main Headline with High 3D Depth */}
+                  <motion.h1
+                    style={{ transform: 'translateZ(65px)' }}
+                    className="font-serif text-2xl sm:text-4xl md:text-5xl text-white leading-[1.12] tracking-tight mb-3 drop-shadow-[0_8px_25px_rgba(0,0,0,0.9)]"
+                  >
+                    {activeBanner.title.split(' ').slice(0, -2).join(' ')}{' '}
+                    <span className="italic font-light text-accent font-serif">
+                      {activeBanner.title.split(' ').slice(-2).join(' ')}
+                    </span>
+                  </motion.h1>
+
+                  {/* Brief Description */}
+                  <motion.p
+                    style={{ transform: 'translateZ(45px)' }}
+                    className="font-sans text-xs sm:text-sm md:text-[0.92rem] text-surface/85 leading-relaxed max-w-lg mb-6 font-normal drop-shadow-[0_4px_16px_rgba(0,0,0,0.85)]"
+                  >
+                    {activeBanner.desc}
+                  </motion.p>
+
+                  {/* Action Row - 3D Popout CTA */}
+                  <motion.div
+                    style={{ transform: 'translateZ(80px)' }}
+                    className="flex flex-wrap items-center gap-3"
+                  >
+                    <a
+                      href="https://wa.me/919702763876?text=Hello%20INCHES%20Studio,%20I%20am%20exploring%20your%20Philosophy%20and%20would%20like%20to%20consult%20for%20my%20residence."
+                      target="_blank"
+                      rel="noreferrer"
+                      className="px-7 py-3 bg-accent hover:bg-accent/90 text-white font-sans text-xs tracking-[0.2em] uppercase font-bold rounded-xl shadow-[0_10px_30px_rgba(138,109,84,0.4)] hover:shadow-[0_15px_40px_rgba(138,109,84,0.6)] transition-all flex items-center gap-2 cursor-pointer hover:scale-105 active:scale-95"
+                    >
+                      <span>Consult Studio</span>
+                      <ArrowUpRight className="w-3.5 h-3.5" />
+                    </a>
+                  </motion.div>
+
                 </motion.div>
+              </AnimatePresence>
+            </div>
 
-              </motion.div>
-            </AnimatePresence>
-          </div>
-
-          {/* Right Floating 3D Holographic Specimen Gyroscope Card (Desktop) */}
-          <motion.div
-            animate={{
-              rotateX: -mousePos.y * 22,
-              rotateY: mousePos.x * 22,
-              z: 60
-            }}
-            transition={{ type: 'spring', stiffness: 150, damping: 22 }}
-            className="hidden lg:flex flex-col items-center justify-center relative p-6 rounded-3xl bg-black/40 border border-white/15 backdrop-blur-xl shadow-[0_25px_60px_rgba(0,0,0,0.7)] ring-1 ring-white/10 w-[240px] transform-gpu"
-            style={{ transformStyle: 'preserve-3d' }}
-          >
-            {/* 3D Rotating Golden Orbital Ring */}
+            {/* Right Floating 3D Holographic Specimen Gyroscope Card (Desktop) */}
             <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-              className="absolute inset-2 rounded-2xl border border-dashed border-accent/30 pointer-events-none"
-            />
-
-            {/* Spec Numerical Badge */}
-            <div
-              style={{ transform: 'translateZ(45px)' }}
-              className="text-center mb-3"
+              animate={{
+                rotateX: -mousePos.y * 22,
+                rotateY: mousePos.x * 22,
+                z: 60
+              }}
+              transition={{ type: 'spring', stiffness: 150, damping: 22 }}
+              className="hidden lg:flex flex-col items-center justify-center relative p-6 rounded-3xl bg-black/40 border border-white/15 backdrop-blur-xl shadow-[0_25px_60px_rgba(0,0,0,0.7)] ring-1 ring-white/10 w-[240px] transform-gpu"
+              style={{ transformStyle: 'preserve-3d' }}
             >
-              <span className="font-mono text-[0.6rem] uppercase tracking-[0.3em] text-accent font-bold block mb-1">
-                Acoustic &amp; Scale Spec
-              </span>
-              <div className="font-serif text-4xl text-white font-medium drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]">
-                {activeBanner.spec}
+              {/* 3D Rotating Golden Orbital Ring */}
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
+                className="absolute inset-2 rounded-2xl border border-dashed border-accent/30 pointer-events-none"
+              />
+
+              {/* Spec Numerical Badge */}
+              <div
+                style={{ transform: 'translateZ(45px)' }}
+                className="text-center mb-3"
+              >
+                <span className="font-mono text-[0.6rem] uppercase tracking-[0.3em] text-accent font-bold block mb-1">
+                  Acoustic &amp; Scale Spec
+                </span>
+                <div className="font-serif text-4xl text-white font-medium drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]">
+                  {activeBanner.spec}
+                </div>
               </div>
-            </div>
 
-            {/* Spec Label */}
-            <div
-              style={{ transform: 'translateZ(30px)' }}
-              className="px-3 py-1 rounded-full bg-accent/20 border border-accent/40 text-[0.62rem] font-sans font-semibold text-accent uppercase tracking-wider text-center"
-            >
-              {activeBanner.specLabel}
-            </div>
-          </motion.div>
+              {/* Spec Label */}
+              <div
+                style={{ transform: 'translateZ(30px)' }}
+                className="px-3 py-1 rounded-full bg-accent/20 border border-accent/40 text-[0.62rem] font-sans font-semibold text-accent uppercase tracking-wider text-center"
+              >
+                {activeBanner.specLabel}
+              </div>
+            </motion.div>
+          </div>
 
         </div>
 
         {/* ===================== BOTTOM FULL-WIDTH TABS & CONTROLS ===================== */}
-        <div className="relative z-20 w-full px-6 sm:px-12 lg:px-16 pt-3">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-t border-white/15 pt-3">
+        <div className="relative z-20 w-full px-4 sm:px-8 lg:px-12 pt-3">
+          <div className="max-w-[94rem] mx-auto w-full">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-t border-white/15 pt-3">
 
-            {/* 4 Interactive Progress Tabs */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 flex-1 max-w-3xl">
-              {BANNER_DATA.map((item, idx) => {
-                const isActive = currentIdx === idx;
-                return (
-                  <button
-                    key={item.id}
-                    onClick={() => handleSelectBanner(idx)}
-                    className={`p-2 sm:p-2.5 rounded-xl text-left transition-all duration-300 relative border cursor-pointer overflow-hidden backdrop-blur-md ${isActive
-                      ? 'bg-black/80 border-accent text-white shadow-lg ring-1 ring-accent/40'
-                      : 'bg-black/40 hover:bg-black/60 border-white/10 text-white/70 hover:text-white'
-                      }`}
-                  >
-                    {/* Active Timer Line */}
-                    {isActive && (
-                      <motion.div
-                        initial={{ width: 0 }}
-                        animate={{ width: '100%' }}
-                        transition={{ duration: 6, ease: 'linear' }}
-                        className="absolute top-0 left-0 h-[2px] bg-accent"
-                      />
-                    )}
+              {/* 4 Interactive Progress Tabs */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 flex-1 max-w-3xl">
+                {BANNER_DATA.map((item, idx) => {
+                  const isActive = currentIdx === idx;
+                  return (
+                    <button
+                      key={item.id}
+                      onClick={() => handleSelectBanner(idx)}
+                      className={`p-2 sm:p-2.5 rounded-xl text-left transition-all duration-300 relative border cursor-pointer overflow-hidden backdrop-blur-md ${isActive
+                        ? 'bg-black/80 border-accent text-white shadow-lg ring-1 ring-accent/40'
+                        : 'bg-black/40 hover:bg-black/60 border-white/10 text-white/70 hover:text-white'
+                        }`}
+                    >
+                      {/* Active Timer Line */}
+                      {isActive && (
+                        <motion.div
+                          initial={{ width: 0 }}
+                          animate={{ width: '100%' }}
+                          transition={{ duration: 6, ease: 'linear' }}
+                          className="absolute top-0 left-0 h-[2px] bg-accent"
+                        />
+                      )}
 
-                    <div className="flex items-center justify-between mb-0.5">
-                      <span className="font-mono text-[0.6rem] font-bold text-accent">
-                        {item.number}
-                      </span>
-                      <span className="text-[0.52rem] font-sans tracking-wider uppercase text-white/50">
-                        {item.category.split(' ')[0]}
-                      </span>
-                    </div>
+                      <div className="flex items-center justify-between mb-0.5">
+                        <span className="font-mono text-[0.6rem] font-bold text-accent">
+                          {item.number}
+                        </span>
+                        <span className="text-[0.52rem] font-sans tracking-wider uppercase text-white/50">
+                          {item.category.split(' ')[0]}
+                        </span>
+                      </div>
 
-                    <h4 className="font-serif text-[0.72rem] sm:text-xs text-white font-medium truncate">
-                      {item.title}
-                    </h4>
-                  </button>
-                );
-              })}
+                      <h4 className="font-serif text-[0.72rem] sm:text-xs text-white font-medium truncate">
+                        {item.title}
+                      </h4>
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Prev / Next Controls */}
+              <div className="flex items-center space-x-1.5 self-end sm:self-auto">
+                <button
+                  onClick={handlePrev}
+                  aria-label="Previous slide"
+                  className="w-8 h-8 rounded-xl bg-black/50 hover:bg-accent border border-white/15 hover:border-accent text-white flex items-center justify-center transition-all cursor-pointer shadow-md active:scale-95"
+                >
+                  <ChevronLeft className="w-3.5 h-3.5" />
+                </button>
+                <button
+                  onClick={handleNext}
+                  aria-label="Next slide"
+                  className="w-8 h-8 rounded-xl bg-black/50 hover:bg-accent border border-white/15 hover:border-accent text-white flex items-center justify-center transition-all cursor-pointer shadow-md active:scale-95"
+                >
+                  <ChevronRight className="w-3.5 h-3.5" />
+                </button>
+              </div>
+
             </div>
-
-            {/* Prev / Next Controls */}
-            <div className="flex items-center space-x-1.5 self-end sm:self-auto">
-              <button
-                onClick={handlePrev}
-                aria-label="Previous slide"
-                className="w-8 h-8 rounded-xl bg-black/50 hover:bg-accent border border-white/15 hover:border-accent text-white flex items-center justify-center transition-all cursor-pointer shadow-md active:scale-95"
-              >
-                <ChevronLeft className="w-3.5 h-3.5" />
-              </button>
-              <button
-                onClick={handleNext}
-                aria-label="Next slide"
-                className="w-8 h-8 rounded-xl bg-black/50 hover:bg-accent border border-white/15 hover:border-accent text-white flex items-center justify-center transition-all cursor-pointer shadow-md active:scale-95"
-              >
-                <ChevronRight className="w-3.5 h-3.5" />
-              </button>
-            </div>
-
           </div>
         </div>
 

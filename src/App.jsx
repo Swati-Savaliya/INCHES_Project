@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import PhilosophyPage from './pages/PhilosophyPage';
 import ExpertisePage from './pages/ExpertisePage';
+import GalleryPage from './pages/GalleryPage';
 
 import './App.css';
 
@@ -19,6 +20,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/philosophy" element={<PhilosophyPage />} />
         <Route path="/expertise" element={<ExpertisePage />} />
+        <Route path="/gallery" element={<GalleryPage />} />
 
         {/* Fallback to Home for unknown routes */}
         <Route path="*" element={<HomePage />} />
