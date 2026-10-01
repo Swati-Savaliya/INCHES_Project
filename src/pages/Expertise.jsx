@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import { ArrowUpRight } from 'lucide-react';
 
 const services = [
   {
@@ -150,11 +152,13 @@ const Expertise = () => {
                       transition={{ duration: 0.5, delay: 0.4 }}
                       className="mt-6"
                     >
-                      <button className="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center text-white hover:bg-white hover:text-primary transition-colors duration-300">
-                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                        </svg>
-                      </button>
+                      <Link
+                        to="/expertise"
+                        className="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center text-white hover:bg-accent hover:border-accent hover:text-white transition-colors duration-300"
+                        title="Explore Full Expertise"
+                      >
+                        <ArrowUpRight className="w-4 h-4" />
+                      </Link>
                     </motion.div>
                   </div>
 
@@ -163,6 +167,17 @@ const Expertise = () => {
             );
           })}
 
+        </div>
+
+        {/* Explore Full Atelier Link */}
+        <div className="mt-12 flex justify-center">
+          <Link
+            to="/expertise"
+            className="group inline-flex items-center gap-3 px-8 py-3.5 bg-primary text-surface hover:bg-accent hover:text-white transition-all duration-300 font-sans text-xs tracking-[0.2em] uppercase font-medium shadow-md"
+          >
+            <span>Explore All Capabilities &amp; Blueprints</span>
+            <ArrowUpRight className="w-4 h-4 transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
+          </Link>
         </div>
       </div>
     </section>

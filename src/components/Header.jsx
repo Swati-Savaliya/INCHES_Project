@@ -23,7 +23,7 @@ const Header = () => {
     const navLinks = [
         { name: 'Home', href: '/', isRoute: true },
         { name: 'Philosophy', href: '/philosophy', isRoute: true },
-        { name: 'Expertise', href: '/#expertise', isRoute: false },
+        { name: 'Expertise', href: '/expertise', isRoute: true },
         { name: 'Gallery', href: '/#gallery', isRoute: false },
         { name: 'Reviews', href: '/#testimonials', isRoute: false },
         { name: 'Contact', href: '/#contact', isRoute: false },

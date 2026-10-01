@@ -114,7 +114,7 @@ const Footer = () => {
                 <Link to="/philosophy" className="hover:text-accent transition-colors">Philosophy</Link>
               </li>
               <li>
-                <a href="/#expertise" className="hover:text-accent transition-colors">Expertise</a>
+                <Link to="/expertise" className="hover:text-accent transition-colors">Expertise</Link>
               </li>
               <li>
                 <a href="/#transformation" className="hover:text-accent transition-colors">Before &amp; After</a>

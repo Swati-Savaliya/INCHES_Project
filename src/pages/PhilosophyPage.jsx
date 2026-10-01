@@ -9,6 +9,8 @@ import {
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import PhilosophyPillarsGrid from './PhilosophyPillarsGrid';
+import PhilosophyManifesto from './PhilosophyManifesto';
+import PhilosophyLivingSpaces from './PhilosophyLivingSpaces';
 
 const BANNER_DATA = [
   {
@@ -53,18 +55,20 @@ const BANNER_DATA = [
   }
 ];
 
-// 3D Perspective Image Transition Variants
+// 3D Perspective Image Transition Variants with deeper volumetric depth
 const slideVariants3D = {
   enter: (direction) => ({
     opacity: 0,
-    rotateY: direction > 0 ? 35 : -35,
-    z: -600,
-    x: direction > 0 ? 350 : -350,
-    scale: 0.85
+    rotateY: direction > 0 ? 45 : -45,
+    rotateX: direction > 0 ? -10 : 10,
+    z: -800,
+    x: direction > 0 ? 450 : -450,
+    scale: 0.78
   }),
   center: {
     opacity: 1,
     rotateY: 0,
+    rotateX: 0,
     z: 0,
     x: 0,
     scale: 1,
@@ -75,24 +79,25 @@ const slideVariants3D = {
   },
   exit: (direction) => ({
     opacity: 0,
-    rotateY: direction < 0 ? 35 : -35,
-    z: -600,
-    x: direction < 0 ? 350 : -350,
-    scale: 0.85,
+    rotateY: direction < 0 ? 45 : -45,
+    rotateX: direction < 0 ? -10 : 10,
+    z: -800,
+    x: direction < 0 ? 450 : -450,
+    scale: 0.78,
     transition: {
-      duration: 1.2,
+      duration: 1.1,
       ease: [0.16, 1, 0.3, 1]
     }
   })
 };
 
-// 3D Perspective Text Reveal Variants
+// 3D Perspective Text Reveal Variants with spring depth
 const textVariants3D = {
   hidden: {
     opacity: 0,
-    rotateX: 45,
-    y: 35,
-    z: -80
+    rotateX: 55,
+    y: 45,
+    z: -120
   },
   visible: {
     opacity: 1,
@@ -107,11 +112,11 @@ const textVariants3D = {
   },
   exit: {
     opacity: 0,
-    rotateX: -40,
-    y: -25,
-    z: -80,
+    rotateX: -45,
+    y: -30,
+    z: -120,
     transition: {
-      duration: 0.6,
+      duration: 0.5,
       ease: [0.16, 1, 0.3, 1]
     }
   }
@@ -121,6 +126,7 @@ const PhilosophyPage = () => {
   const [currentIdx, setCurrentIdx] = useState(0);
   const [direction, setDirection] = useState(1);
   const [isAutoPlay, setIsAutoPlay] = useState(true);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
   const activeBanner = BANNER_DATA[currentIdx];
 
@@ -137,6 +143,17 @@ const PhilosophyPage = () => {
     }, 6000);
     return () => clearInterval(timer);
   }, [isAutoPlay, currentIdx]);
+
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width - 0.5) * 2; // -1 to 1
+    const y = ((e.clientY - rect.top) / rect.height - 0.5) * 2; // -1 to 1
+    setMousePos({ x, y });
+  };
+
+  const handleMouseLeave = () => {
+    setMousePos({ x: 0, y: 0 });
+  };
 
   const handleSelectBanner = (idx) => {
     setIsAutoPlay(false);
@@ -162,14 +179,25 @@ const PhilosophyPage = () => {
       {/* Header */}
       <Header />
 
-      {/* ===================== FULL-WIDTH 3D CINEMATIC BANNER SECTION ===================== */}
+      {/* ===================== FULL-WIDTH 3D CINEMATIC BANNER SECTION WITH REAL-TIME 3D PARALLAX ===================== */}
       <section
-        className="relative w-full h-[65vh] sm:h-[70vh] md:h-[72vh] min-h-[460px] max-h-[640px] overflow-hidden flex flex-col justify-between pt-20 sm:pt-24 pb-4 sm:pb-6 mt-16 sm:mt-18"
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        className="relative w-full h-[68vh] sm:h-[72vh] md:h-[75vh] min-h-[480px] max-h-[680px] overflow-hidden flex flex-col justify-between pt-20 sm:pt-24 pb-4 sm:pb-6 mt-16 sm:mt-18 select-none"
         style={{ perspective: '1400px' }}
       >
 
-        {/* 3D Background Images Carousel */}
-        <div className="absolute inset-0 w-full h-full z-0 overflow-hidden bg-black" style={{ perspective: '1200px' }}>
+        {/* 3D Background Images Carousel with Parallax Tilt */}
+        <motion.div
+          animate={{
+            rotateX: -mousePos.y * 6,
+            rotateY: mousePos.x * 6,
+            scale: 1.04
+          }}
+          transition={{ type: 'spring', stiffness: 120, damping: 20 }}
+          className="absolute inset-0 w-full h-full z-0 overflow-hidden bg-black"
+          style={{ perspective: '1200px', transformStyle: 'preserve-3d' }}
+        >
           <AnimatePresence initial={false} custom={direction} mode="wait">
             <motion.div
               key={activeBanner.id}
@@ -181,31 +209,43 @@ const PhilosophyPage = () => {
               className="absolute inset-0 w-full h-full transform-gpu"
               style={{ transformStyle: 'preserve-3d' }}
             >
-              {/* Clear, High-Resolution Architectural Image with Subtle Ken-Burns scale */}
+              {/* High-Resolution Architectural Image with subtle depth translation */}
               <motion.img
-                initial={{ scale: 1.06 }}
-                animate={{ scale: 1.01 }}
+                initial={{ scale: 1.08 }}
+                animate={{ scale: 1.02 }}
                 transition={{ duration: 7, ease: 'linear' }}
                 src={activeBanner.image}
                 alt={activeBanner.title}
-                className="w-full h-full object-cover object-center brightness-[0.95] contrast-[1.05]"
+                className="w-full h-full object-cover object-center brightness-[0.93] contrast-[1.06]"
+                style={{ transform: 'translateZ(-50px)' }}
               />
 
-              {/* Minimal Side-Vignette on Left for Crisp Typography Contrast */}
-              <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/45 sm:via-black/30 to-transparent pointer-events-none" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30 pointer-events-none" />
+              {/* Holographic blueprint micro grid lines overlay */}
+              <div
+                className="absolute inset-0 opacity-15 pointer-events-none"
+                style={{
+                  backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.2) 1px, transparent 0)',
+                  backgroundSize: '40px 40px',
+                  transform: 'translateZ(-20px)'
+                }}
+              />
+
+              {/* Minimal Contrast Vignette */}
+              <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/50 sm:via-black/30 to-transparent pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-black/35 pointer-events-none" />
             </motion.div>
           </AnimatePresence>
-        </div>
+        </motion.div>
 
         {/* Ambient Warm Accent Glow */}
-        <div className="absolute top-1/4 left-1/6 w-[350px] h-[250px] bg-accent/20 rounded-full blur-[130px] pointer-events-none z-10" />
+        <div className="absolute top-1/4 left-1/6 w-[400px] h-[300px] bg-accent/20 rounded-full blur-[140px] pointer-events-none z-10" />
 
-        {/* ===================== MAIN 3D CONTENT OVERLAY ===================== */}
+        {/* ===================== MAIN 3D MULTI-PLANE CONTENT OVERLAY ===================== */}
         <div
-          className="relative z-20 w-full px-6 sm:px-12 lg:px-16 flex-1 flex flex-col justify-center"
-          style={{ perspective: '1000px' }}
+          className="relative z-20 w-full px-6 sm:px-12 lg:px-16 flex-1 flex items-center justify-between"
+          style={{ perspective: '1200px' }}
         >
+          {/* Left Text Block */}
           <div className="max-w-2xl">
             <AnimatePresence mode="wait">
               <motion.div
@@ -214,12 +254,19 @@ const PhilosophyPage = () => {
                 initial="hidden"
                 animate="visible"
                 exit="exit"
+                animateTransform={{
+                  rotateX: -mousePos.y * 10,
+                  rotateY: mousePos.x * 10
+                }}
                 className="transform-gpu"
                 style={{ transformStyle: 'preserve-3d' }}
               >
 
-                {/* Category Pill */}
-                <div className="flex items-center gap-2 mb-2 sm:mb-3">
+                {/* Category Pill with 3D Float */}
+                <motion.div
+                  style={{ transform: 'translateZ(40px)' }}
+                  className="flex items-center gap-2 mb-2 sm:mb-3"
+                >
                   <span className="w-5 h-[1.5px] bg-accent" />
                   <span className="font-sans text-[0.62rem] sm:text-xs tracking-[0.3em] text-accent uppercase font-bold drop-shadow-sm">
                     {activeBanner.category}
@@ -227,47 +274,87 @@ const PhilosophyPage = () => {
                   <span className="font-mono text-[0.65rem] text-white/50 ml-1">
                     [{activeBanner.number}/04]
                   </span>
-                </div>
+                </motion.div>
 
-                {/* Main Headline */}
-                <h1 className="font-serif text-2xl sm:text-4xl md:text-5xl text-white leading-[1.12] tracking-tight mb-2.5 drop-shadow-[0_4px_16px_rgba(0,0,0,0.85)]">
+                {/* Main Headline with High 3D Depth */}
+                <motion.h1
+                  style={{ transform: 'translateZ(65px)' }}
+                  className="font-serif text-2xl sm:text-4xl md:text-5xl text-white leading-[1.12] tracking-tight mb-3 drop-shadow-[0_8px_25px_rgba(0,0,0,0.9)]"
+                >
                   {activeBanner.title.split(' ').slice(0, -2).join(' ')}{' '}
                   <span className="italic font-light text-accent font-serif">
                     {activeBanner.title.split(' ').slice(-2).join(' ')}
                   </span>
-                </h1>
+                </motion.h1>
 
-                {/* Brief & Clean Description */}
-                <p className="font-sans text-xs sm:text-sm md:text-[0.92rem] text-surface/85 leading-relaxed max-w-lg mb-5 font-normal drop-shadow-[0_2px_10px_rgba(0,0,0,0.85)]">
+                {/* Brief Description */}
+                <motion.p
+                  style={{ transform: 'translateZ(45px)' }}
+                  className="font-sans text-xs sm:text-sm md:text-[0.92rem] text-surface/85 leading-relaxed max-w-lg mb-6 font-normal drop-shadow-[0_4px_16px_rgba(0,0,0,0.85)]"
+                >
                   {activeBanner.desc}
-                </p>
+                </motion.p>
 
-                {/* Action Row - Single Clean CTA */}
-                <div className="flex flex-wrap items-center gap-3">
+                {/* Action Row - 3D Popout CTA */}
+                <motion.div
+                  style={{ transform: 'translateZ(80px)' }}
+                  className="flex flex-wrap items-center gap-3"
+                >
                   <a
                     href="https://wa.me/919702763876?text=Hello%20INCHES%20Studio,%20I%20am%20exploring%20your%20Philosophy%20and%20would%20like%20to%20consult%20for%20my%20residence."
                     target="_blank"
                     rel="noreferrer"
-                    className="px-7 py-3 bg-accent hover:bg-accent/90 text-white font-sans text-xs tracking-[0.2em] uppercase font-bold rounded-xl shadow-lg shadow-accent/25 transition-all flex items-center gap-2 cursor-pointer hover:scale-103"
+                    className="px-7 py-3 bg-accent hover:bg-accent/90 text-white font-sans text-xs tracking-[0.2em] uppercase font-bold rounded-xl shadow-[0_10px_30px_rgba(138,109,84,0.4)] hover:shadow-[0_15px_40px_rgba(138,109,84,0.6)] transition-all flex items-center gap-2 cursor-pointer hover:scale-105 active:scale-95"
                   >
                     <span>Consult Studio</span>
                     <ArrowUpRight className="w-3.5 h-3.5" />
                   </a>
-
-                  {/* Spec Badge */}
-                  <div className="hidden sm:flex items-center gap-2 px-3.5 py-2 rounded-xl bg-black/55 backdrop-blur-md border border-white/15">
-                    <span className="font-serif text-sm font-semibold text-accent leading-none">
-                      {activeBanner.spec}
-                    </span>
-                    <span className="text-[0.6rem] uppercase tracking-wider text-surface/70 font-sans">
-                      {activeBanner.specLabel}
-                    </span>
-                  </div>
-                </div>
+                </motion.div>
 
               </motion.div>
             </AnimatePresence>
           </div>
+
+          {/* Right Floating 3D Holographic Specimen Gyroscope Card (Desktop) */}
+          <motion.div
+            animate={{
+              rotateX: -mousePos.y * 22,
+              rotateY: mousePos.x * 22,
+              z: 60
+            }}
+            transition={{ type: 'spring', stiffness: 150, damping: 22 }}
+            className="hidden lg:flex flex-col items-center justify-center relative p-6 rounded-3xl bg-black/40 border border-white/15 backdrop-blur-xl shadow-[0_25px_60px_rgba(0,0,0,0.7)] ring-1 ring-white/10 w-[240px] transform-gpu"
+            style={{ transformStyle: 'preserve-3d' }}
+          >
+            {/* 3D Rotating Golden Orbital Ring */}
+            <motion.div
+              animate={{ rotate: 360 }}
+              transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
+              className="absolute inset-2 rounded-2xl border border-dashed border-accent/30 pointer-events-none"
+            />
+
+            {/* Spec Numerical Badge */}
+            <div
+              style={{ transform: 'translateZ(45px)' }}
+              className="text-center mb-3"
+            >
+              <span className="font-mono text-[0.6rem] uppercase tracking-[0.3em] text-accent font-bold block mb-1">
+                Acoustic &amp; Scale Spec
+              </span>
+              <div className="font-serif text-4xl text-white font-medium drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]">
+                {activeBanner.spec}
+              </div>
+            </div>
+
+            {/* Spec Label */}
+            <div
+              style={{ transform: 'translateZ(30px)' }}
+              className="px-3 py-1 rounded-full bg-accent/20 border border-accent/40 text-[0.62rem] font-sans font-semibold text-accent uppercase tracking-wider text-center"
+            >
+              {activeBanner.specLabel}
+            </div>
+          </motion.div>
+
         </div>
 
         {/* ===================== BOTTOM FULL-WIDTH TABS & CONTROLS ===================== */}
@@ -339,6 +426,12 @@ const PhilosophyPage = () => {
 
       {/* ===================== PHILOSOPHY PILLARS & SENSORY LAB SECTION ===================== */}
       <PhilosophyPillarsGrid />
+
+      {/* ===================== SPATIAL MANIFESTO & INTERACTIVE ATELIER ===================== */}
+      <PhilosophyManifesto />
+
+      {/* ===================== NEW LIGHT LUXURY SECTION: SPATIAL TYPOLOGIES & LIVING SPACES ===================== */}
+      <PhilosophyLivingSpaces />
 
       {/* Footer */}
       <Footer />

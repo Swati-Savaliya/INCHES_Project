@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowUpRight, Sparkles } from 'lucide-react';
+import { ArrowUpRight, Sparkles, Compass } from 'lucide-react';
 
 const PILLARS = [
   {
@@ -53,7 +53,8 @@ const PhilosophyPillarsGrid = () => {
           <div>
             <div className="flex items-center space-x-2 mb-1.5">
               <span className="w-5 h-[1.5px] bg-accent" />
-              <span className="font-sans text-[0.62rem] tracking-[0.35em] text-accent uppercase font-bold">
+              <span className="font-sans text-[0.62rem] tracking-[0.35em] text-accent uppercase font-bold flex items-center gap-1.5">
+                <Compass className="w-3 h-3 text-accent" />
                 Design Principles
               </span>
             </div>
@@ -66,7 +67,7 @@ const PhilosophyPillarsGrid = () => {
             href="https://wa.me/919702763876?text=Hello%20INCHES%20Studio,%20I%20would%20like%20to%20consult%20about%20your%20design%20philosophy."
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-2 text-xs font-sans text-accent hover:text-primary uppercase tracking-widest transition-colors font-bold self-start sm:self-auto"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-accent text-white hover:bg-accent/90 text-xs font-sans uppercase tracking-[0.2em] transition-all font-bold self-start sm:self-auto shadow-md hover:shadow-lg hover:scale-103 cursor-pointer"
           >
             <span>Discuss Project</span>
             <ArrowUpRight className="w-3.5 h-3.5" />
@@ -85,8 +86,8 @@ const PhilosophyPillarsGrid = () => {
                 onClick={() => setHoveredIdx(idx)}
                 layout
                 transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                className={`relative rounded-2xl overflow-hidden cursor-pointer border transition-all duration-500 flex flex-col justify-between p-6 ${isHovered
-                  ? 'border-accent md:flex-[1.6] shadow-[0_20px_40px_rgba(138,109,84,0.18)]'
+                className={`relative rounded-3xl overflow-hidden cursor-pointer border transition-all duration-500 flex flex-col justify-between p-6 sm:p-7 ${isHovered
+                  ? 'border-accent md:flex-[1.6] shadow-[0_25px_50px_rgba(138,109,84,0.22)] ring-1 ring-accent/40'
                   : 'border-primary/10 md:flex-[1] hover:border-primary/25 shadow-sm'
                   }`}
               >
@@ -97,42 +98,50 @@ const PhilosophyPillarsGrid = () => {
                     alt={pillar.title}
                     animate={{ scale: isHovered ? 1.08 : 1 }}
                     transition={{ duration: 0.8 }}
-                    className="w-full h-full object-cover brightness-[0.92] contrast-[1.05]"
+                    className="w-full h-full object-cover brightness-[0.88] contrast-[1.08]"
                   />
-                  {/* Gradient Vignette for crisp text contrast */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/20" />
+                  {/* Subtle Grain & Gradient Vignette for text contrast */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/45 to-black/25" />
+                  <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-transparent" />
                 </div>
 
                 {/* Top Number & Tag */}
                 <div className="relative z-10 flex items-center justify-between">
-                  <span className="font-mono text-xl sm:text-2xl font-light text-accent drop-shadow-md">
+                  <span className="font-mono text-xl sm:text-2xl font-bold text-accent drop-shadow-md">
                     {pillar.id}
                   </span>
-                  <span className="px-2.5 py-0.5 rounded-full bg-white/90 backdrop-blur-md border border-white/40 text-[0.6rem] font-sans tracking-wider uppercase text-primary font-semibold shadow-xs">
+                  <span className="px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-[0.62rem] font-sans tracking-widest uppercase text-white font-semibold shadow-sm">
                     {pillar.tag}
                   </span>
                 </div>
 
                 {/* Bottom Content (Minimal & Punchy) */}
-                <div className="relative z-10 space-y-2">
+                <div className="relative z-10 space-y-2.5">
                   <div className="flex items-center justify-between">
-                    <h3 className="font-serif text-lg sm:text-xl text-white font-medium drop-shadow-md">
+                    <h3 className="font-serif text-lg sm:text-xl md:text-2xl text-white font-medium drop-shadow-md">
                       {pillar.title}
                     </h3>
-                    <span className="font-mono text-xs text-accent font-semibold bg-black/60 backdrop-blur-md px-2 py-0.5 rounded-md border border-accent/30">
+                    <span className="font-mono text-xs text-accent font-semibold bg-black/70 backdrop-blur-md px-2.5 py-1 rounded-lg border border-accent/40 shadow-sm">
                       {pillar.spec}
                     </span>
                   </div>
 
-                  <p className="font-sans text-xs text-surface/90 leading-relaxed font-light line-clamp-2 drop-shadow-sm">
+                  <p className="font-sans text-xs text-white/80 leading-relaxed font-light line-clamp-2 drop-shadow-sm">
                     {pillar.desc}
                   </p>
 
-                  <div className="pt-1 flex items-center gap-1.5 text-accent text-[0.68rem] font-sans font-bold tracking-wider uppercase">
+                  <div className="pt-1 flex items-center gap-1.5 text-accent text-[0.68rem] font-sans font-bold tracking-widest uppercase">
                     <span>Studio Principle</span>
-                    <Sparkles className="w-3 h-3" />
+                    <Sparkles className="w-3.5 h-3.5" />
                   </div>
                 </div>
+
+                {/* Bottom Active Glow Bar */}
+                <div
+                  className={`absolute bottom-0 left-0 right-0 h-[3px] bg-gradient-to-r from-accent via-white/80 to-accent transition-opacity duration-300 ${
+                    isHovered ? 'opacity-100' : 'opacity-0'
+                  }`}
+                />
               </motion.div>
             );
           })}
