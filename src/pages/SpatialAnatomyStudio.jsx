@@ -162,22 +162,31 @@ const SpatialAnatomyStudio = () => {
 
       <div className="max-w-[95rem] mx-auto relative z-10">
 
-        {/* Minimal High-Fashion Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6 pb-4 border-b border-white/10">
-          <div>
-            <div className="flex items-center space-x-2 mb-1">
-              <span className="w-5 h-[1.5px] bg-accent" />
-              <span className="font-mono text-[0.62rem] tracking-[0.3em] text-accent uppercase font-bold">
-                SPATIAL ANATOMY STUDIO
-              </span>
-            </div>
-            <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl text-white tracking-tight">
-              Blueprint to <span className="italic font-light text-accent font-serif">Sensory Reality.</span>
-            </h2>
+        {/* Minimal High-Fashion Header - Centered */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="flex flex-col items-center justify-center text-center max-w-4xl mx-auto mb-8 pb-5 border-b border-white/10"
+        >
+          {/* Symmetrical Eyebrow */}
+          <div className="flex items-center justify-center space-x-2.5 mb-2.5">
+            <span className="w-6 sm:w-10 h-[1.5px] bg-accent" />
+            <span className="font-mono text-[0.68rem] sm:text-xs tracking-[0.3em] text-accent uppercase font-bold flex items-center gap-1.5">
+              <Sparkles className="w-3.5 h-3.5 text-accent" />
+              SPATIAL ANATOMY STUDIO
+            </span>
+            <span className="w-6 sm:w-10 h-[1.5px] bg-accent" />
           </div>
 
-          {/* Space Switcher Tabs */}
-          <div className="flex items-center gap-1.5 p-1 bg-black/60 border border-white/10 rounded-xl backdrop-blur-md self-start sm:self-auto">
+          {/* Centered Headline */}
+          <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-white tracking-tight font-normal mb-4 leading-[1.18]">
+            Blueprint to <span className="italic font-light text-accent font-serif">Sensory Reality.</span>
+          </h2>
+
+          {/* Space Switcher Tabs Dock */}
+          <div className="flex items-center gap-1.5 p-1.5 bg-white/[0.05] border border-white/10 rounded-2xl backdrop-blur-xl shadow-lg">
             {SPACES.map((space, idx) => {
               const isSelected = activeSpaceIdx === idx;
               return (
@@ -187,9 +196,9 @@ const SpatialAnatomyStudio = () => {
                     setActiveSpaceIdx(idx);
                     setActiveHotspot(null);
                   }}
-                  className={`px-3 py-1.5 rounded-lg font-sans text-xs transition-all cursor-pointer font-medium ${
+                  className={`px-4 py-2 rounded-xl font-sans text-xs sm:text-sm tracking-wide transition-all duration-300 cursor-pointer font-medium ${
                     isSelected
-                      ? 'bg-accent text-white shadow-md'
+                      ? 'bg-accent text-white shadow-[0_4px_15px_rgba(138,109,84,0.4)]'
                       : 'text-white/60 hover:text-white hover:bg-white/5'
                   }`}
                 >
@@ -198,7 +207,7 @@ const SpatialAnatomyStudio = () => {
               );
             })}
           </div>
-        </div>
+        </motion.div>
 
         {/* Interactive 4-Layer Mode Switcher Bar */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 mb-5">

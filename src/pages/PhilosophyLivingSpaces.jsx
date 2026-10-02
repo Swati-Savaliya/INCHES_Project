@@ -107,21 +107,33 @@ const PhilosophyLivingSpaces = () => {
 
       <div className="max-w-[94rem] mx-auto relative z-10">
 
-        {/* ===================== COMPACT EDITORIAL HEADER STRIP ===================== */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-6 pb-3 border-b border-[#E5DFD3]">
-          <div className="flex items-center gap-3">
-            <span className="w-6 h-[2px] bg-[#8A6D54]" />
-            <span className="font-mono text-xs tracking-[0.25em] uppercase text-[#8A6D54] font-bold">
+        {/* ===================== COMPACT EDITORIAL HEADER STRIP - CENTERED ===================== */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="flex flex-col items-center justify-center text-center max-w-3xl mx-auto mb-8 pb-4 border-b border-[#E5DFD3]"
+        >
+          <div className="flex items-center justify-center space-x-2.5 mb-2">
+            <span className="w-6 sm:w-10 h-[1.5px] bg-[#8A6D54]" />
+            <span className="font-mono text-xs tracking-[0.25em] uppercase text-[#8A6D54] font-bold flex items-center gap-1.5">
+              <Sparkles className="w-3.5 h-3.5 text-[#8A6D54]" />
               SPATIAL ATELIER • 04 LIVING REALMS
             </span>
+            <span className="w-6 sm:w-10 h-[1.5px] bg-[#8A6D54]" />
           </div>
 
-          <div className="flex items-center gap-4 text-xs font-mono text-[#7D766C]">
-            <span className="hidden sm:inline">Crafted for INCHES Residences</span>
+          <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-normal text-[#1A1A1A] tracking-tight mb-2 leading-[1.2]">
+            Curated Living <span className="italic font-light text-[#8A6D54] font-serif">Realms &amp; Suites.</span>
+          </h2>
+
+          <div className="flex items-center justify-center gap-3 text-xs font-mono text-[#7D766C]">
+            <span>Crafted for INCHES Residences</span>
             <span className="w-1.5 h-1.5 rounded-full bg-[#8A6D54]" />
             <span className="font-semibold text-[#1A1A1A]">Curated Edition 2026</span>
           </div>
-        </div>
+        </motion.div>
 
         {/* ===================== 3-MODULE EDITORIAL MAGAZINE LAYOUT ===================== */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-stretch">

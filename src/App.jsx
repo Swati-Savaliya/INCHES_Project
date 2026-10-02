@@ -4,6 +4,8 @@ import HomePage from './pages/HomePage';
 import PhilosophyPage from './pages/PhilosophyPage';
 import ExpertisePage from './pages/ExpertisePage';
 import GalleryPage from './pages/GalleryPage';
+import ReviewsPage from './pages/ReviewsPage';
+import AdminReviewsPage from './pages/AdminReviewsPage';
 
 import './App.css';
 
@@ -21,6 +23,10 @@ function App() {
         <Route path="/philosophy" element={<PhilosophyPage />} />
         <Route path="/expertise" element={<ExpertisePage />} />
         <Route path="/gallery" element={<GalleryPage />} />
+        <Route path="/reviews" element={<ReviewsPage />} />
+        
+        {/* Secret Dedicated Admin Portal Route */}
+        <Route path="/admin_portal" element={<AdminReviewsPage />} />
 
         {/* Fallback to Home for unknown routes */}
         <Route path="*" element={<HomePage />} />

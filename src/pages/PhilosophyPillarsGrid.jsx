@@ -48,31 +48,31 @@ const PhilosophyPillarsGrid = () => {
 
       <div className="max-w-[95rem] mx-auto relative z-10">
 
-        {/* Minimal Light Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10 pb-4 border-b border-primary/10">
-          <div>
-            <div className="flex items-center space-x-2 mb-1.5">
-              <span className="w-5 h-[1.5px] bg-accent" />
-              <span className="font-sans text-[0.62rem] tracking-[0.35em] text-accent uppercase font-bold flex items-center gap-1.5">
-                <Compass className="w-3 h-3 text-accent" />
-                Design Principles
-              </span>
-            </div>
-            <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl text-primary tracking-tight">
-              The Four Spatial <span className="italic font-light text-accent">Disciplines.</span>
-            </h2>
+        {/* Minimal Light Header - Centered */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="flex flex-col items-center justify-center text-center max-w-3xl mx-auto mb-10 pb-6 border-b border-primary/10"
+        >
+          <div className="flex items-center justify-center space-x-2.5 mb-2.5">
+            <span className="w-6 sm:w-10 h-[1.5px] bg-accent" />
+            <span className="font-mono text-[0.68rem] sm:text-xs tracking-[0.3em] text-accent uppercase font-bold flex items-center gap-1.5">
+              <Compass className="w-3.5 h-3.5 text-accent" />
+              Design Principles
+            </span>
+            <span className="w-6 sm:w-10 h-[1.5px] bg-accent" />
           </div>
 
-          <a
-            href="https://wa.me/919702763876?text=Hello%20INCHES%20Studio,%20I%20would%20like%20to%20consult%20about%20your%20design%20philosophy."
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-accent text-white hover:bg-accent/90 text-xs font-sans uppercase tracking-[0.2em] transition-all font-bold self-start sm:self-auto shadow-md hover:shadow-lg hover:scale-103 cursor-pointer"
-          >
-            <span>Discuss Project</span>
-            <ArrowUpRight className="w-3.5 h-3.5" />
-          </a>
-        </div>
+          <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-normal text-primary tracking-tight mb-2.5 leading-[1.2]">
+            The Four Spatial <span className="italic font-light text-accent">Disciplines.</span>
+          </h2>
+
+          <p className="font-sans text-xs sm:text-sm text-primary/70 max-w-xl font-light leading-relaxed">
+            Crafting architectural poise where spatial geometry, raw tactile truth, and circadian illumination converge.
+          </p>
+        </motion.div>
 
         {/* ===================== LIGHT 4-PORTAL EXPANDABLE ACCORDION GRID ===================== */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 min-h-[460px] md:h-[500px]">

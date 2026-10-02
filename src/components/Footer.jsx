@@ -117,10 +117,13 @@ const Footer = () => {
                 <Link to="/expertise" className="hover:text-accent transition-colors">Expertise</Link>
               </li>
               <li>
-                <a href="/#transformation" className="hover:text-accent transition-colors">Before &amp; After</a>
+                <Link to="/gallery" className="hover:text-accent transition-colors">Gallery</Link>
               </li>
               <li>
-                <a href="/#gallery" className="hover:text-accent transition-colors">Portfolio</a>
+                <Link to="/reviews" className="hover:text-accent transition-colors">Reviews</Link>
+              </li>
+              <li>
+                <a href="/#transformation" className="hover:text-accent transition-colors">Before &amp; After</a>
               </li>
               <li>
                 <a href="/#visualizer" className="hover:text-accent transition-colors">Studio Visualizer</a>

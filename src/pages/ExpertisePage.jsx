@@ -134,6 +134,61 @@ const textVariants3D = {
   }
 };
 
+// Smooth Animated Counter component for Expertise metrics (Counts up from 0 when in view)
+function AnimatedCounter({ end, duration = 2.2, decimals = 0, prefix = '', suffix = '' }) {
+  const [count, setCount] = useState(0);
+  const nodeRef = React.useRef(null);
+  const [hasAnimated, setHasAnimated] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !hasAnimated) {
+          setHasAnimated(true);
+          let startTime = null;
+          const startValue = 0;
+          const endValue = parseFloat(end);
+
+          const step = (timestamp) => {
+            if (!startTime) startTime = timestamp;
+            const progress = Math.min((timestamp - startTime) / (duration * 1000), 1);
+            const easeProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+            const current = startValue + (endValue - startValue) * easeProgress;
+
+            setCount(current);
+
+            if (progress < 1) {
+              window.requestAnimationFrame(step);
+            } else {
+              setCount(endValue);
+            }
+          };
+
+          window.requestAnimationFrame(step);
+        }
+      },
+      { threshold: 0.15 }
+    );
+
+    if (nodeRef.current) {
+      observer.observe(nodeRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [end, duration, hasAnimated]);
+
+  return (
+    <span ref={nodeRef}>
+      {prefix}
+      {count.toLocaleString(undefined, {
+        minimumFractionDigits: decimals,
+        maximumFractionDigits: decimals
+      })}
+      {suffix}
+    </span>
+  );
+}
+
 // 3D Interactive Tilt Metric Card Component
 const Metric3DCard = ({ num, unit, label, sublabel, icon: Icon, index }) => {
   const [rotateX, setRotateX] = useState(0);
@@ -227,7 +282,11 @@ const Metric3DCard = ({ num, unit, label, sublabel, icon: Icon, index }) => {
         {/* Sculpted 3D Number */}
         <div className="relative z-10 mb-2" style={{ transform: 'translateZ(35px)' }}>
           <div className="font-serif text-3xl sm:text-4xl text-primary font-medium tracking-tight flex items-baseline">
-            <span>{num}</span>
+            <AnimatedCounter
+              end={parseFloat(num)}
+              decimals={num.includes('.') ? num.split('.')[1].length : 0}
+              duration={2.2}
+            />
             <span className="text-accent text-lg sm:text-xl font-sans font-light ml-1">
               {unit}
             </span>
@@ -590,11 +649,38 @@ const ExpertisePage = () => {
 
 
       {/* ===================== 3D INTERACTIVE METRICS STRIP (LIGHT) ===================== */}
-      <section className="w-full bg-[#FDF9F1] text-primary border-y border-primary/10 py-10 sm:py-14 px-4 sm:px-8 lg:px-12 relative overflow-hidden">
+      <section className="w-full bg-[#FDF9F1] text-primary border-y border-primary/10 py-12 sm:py-16 px-4 sm:px-8 lg:px-12 relative overflow-hidden">
         {/* Subtle ambient lighting */}
-        <div className="absolute top-1/2 left-1/3 -translate-y-1/2 w-[600px] h-[300px] bg-accent/6 rounded-full blur-[140px] pointer-events-none" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-accent/8 rounded-full blur-[150px] pointer-events-none" />
 
         <div className="max-w-[95rem] mx-auto relative z-10">
+          
+          {/* Section Header Strip - Centered */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="flex flex-col items-center justify-center text-center max-w-3xl mx-auto mb-10 pb-6 border-b border-primary/10"
+          >
+            <div className="flex items-center justify-center space-x-2.5 mb-2.5">
+              <span className="w-6 sm:w-10 h-[1.5px] bg-accent" />
+              <span className="font-mono text-[0.68rem] sm:text-xs tracking-[0.3em] text-accent uppercase font-bold flex items-center gap-1.5">
+                <Sparkles className="w-3.5 h-3.5 text-accent" />
+                Technical Rigor &amp; Benchmarks
+              </span>
+              <span className="w-6 sm:w-10 h-[1.5px] bg-accent" />
+            </div>
+
+            <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-normal text-primary tracking-tight mb-2.5 leading-[1.2]">
+              Engineered Precision &amp; <span className="italic font-light text-accent">Craft Standards.</span>
+            </h2>
+
+            <p className="font-sans text-xs sm:text-sm text-primary/70 max-w-xl font-light leading-relaxed">
+              Every millimeter, lighting spectrum, and 3D architectural twin held to uncompromising German engineering benchmarks.
+            </p>
+          </motion.div>
+
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {METRICS_DATA.map((item, idx) => (
               <Metric3DCard key={idx} index={idx} {...item} />

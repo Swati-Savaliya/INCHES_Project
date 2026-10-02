@@ -179,7 +179,6 @@ const PhilosophyPage = () => {
       {/* Header */}
       <Header />
 
-      {/* ===================== FULL-WIDTH 3D CINEMATIC BANNER SECTION WITH REAL-TIME 3D PARALLAX ===================== */}
       <section
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
@@ -187,7 +186,7 @@ const PhilosophyPage = () => {
         style={{ perspective: '1400px' }}
       >
 
-        {/* 3D Background Images Carousel with Parallax Tilt */}
+
         <motion.div
           animate={{
             rotateX: -mousePos.y * 6,

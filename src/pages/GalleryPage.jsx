@@ -19,7 +19,9 @@ import {
   SlidersHorizontal,
   Grid3X3,
   LayoutGrid,
-  CheckCircle2
+  CheckCircle2,
+  Building2,
+  Award
 } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -391,11 +393,103 @@ const textVariants3D = {
   }
 };
 
+// Smooth Animated Counter component for Gallery Metrics (Counts up from 0 when in view)
+function AnimatedCounter({ end, duration = 2.2, decimals = 0, prefix = '', suffix = '' }) {
+  const [count, setCount] = useState(0);
+  const nodeRef = React.useRef(null);
+  const [hasAnimated, setHasAnimated] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !hasAnimated) {
+          setHasAnimated(true);
+          let startTime = null;
+          const startValue = 0;
+          const endValue = parseFloat(end);
+
+          const step = (timestamp) => {
+            if (!startTime) startTime = timestamp;
+            const progress = Math.min((timestamp - startTime) / (duration * 1000), 1);
+            // Smooth easeOutExpo transition
+            const easeProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+            const current = startValue + (endValue - startValue) * easeProgress;
+
+            setCount(current);
+
+            if (progress < 1) {
+              window.requestAnimationFrame(step);
+            } else {
+              setCount(endValue);
+            }
+          };
+
+          window.requestAnimationFrame(step);
+        }
+      },
+      { threshold: 0.15 }
+    );
+
+    if (nodeRef.current) {
+      observer.observe(nodeRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [end, duration, hasAnimated]);
+
+  return (
+    <span ref={nodeRef}>
+      {prefix}
+      {count.toLocaleString(undefined, {
+        minimumFractionDigits: decimals,
+        maximumFractionDigits: decimals
+      })}
+      {suffix}
+    </span>
+  );
+}
+
 const STATS_BAR = [
-  { val: '250+', label: 'Luxury Residences', sub: 'Completed across Gujarat' },
-  { val: '0.1mm', label: 'Precision Tolerances', sub: 'Engineered bespoke joinery' },
-  { val: '100%', label: 'Living Natural Materials', sub: 'Stone, timber & lime plaster' },
-  { val: '14', label: 'Design Citations', sub: 'National architecture recognition' }
+  {
+    id: '01',
+    end: 250,
+    decimals: 0,
+    suffix: '+',
+    label: 'Luxury Residences',
+    sub: 'Completed across Gujarat',
+    badge: 'Statewide Portfolio',
+    icon: Building2
+  },
+  {
+    id: '02',
+    end: 0.1,
+    decimals: 1,
+    suffix: 'mm',
+    label: 'Precision Tolerances',
+    sub: 'Engineered bespoke joinery',
+    badge: 'Craft Millimeters',
+    icon: Ruler
+  },
+  {
+    id: '03',
+    end: 100,
+    decimals: 0,
+    suffix: '%',
+    label: 'Living Natural Materials',
+    sub: 'Stone, timber & lime plaster',
+    badge: 'Pure Provenance',
+    icon: Sparkles
+  },
+  {
+    id: '04',
+    end: 14,
+    decimals: 0,
+    suffix: '',
+    label: 'Design Citations',
+    sub: 'National architecture recognition',
+    badge: 'National Honors',
+    icon: Award
+  }
 ];
 
 const GalleryPage = () => {
@@ -763,22 +857,114 @@ const GalleryPage = () => {
       </section>
 
       {/* ===================== GALLERY STATS STRIP ===================== */}
-      <section className="w-full bg-[#FAF7F2] text-[#1A1A1A] py-8 sm:py-10 px-4 sm:px-8 lg:px-12 border-b border-[#E8E2D6] relative overflow-hidden">
-        <div className="max-w-[94rem] mx-auto w-full">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
-            {STATS_BAR.map((stat, sIdx) => (
-              <div key={sIdx} className="space-y-0.5">
-                <div className="font-serif text-2xl sm:text-3xl text-[#1A1A1A] font-medium">
-                  {stat.val}
-                </div>
-                <div className="font-sans text-xs font-bold text-accent uppercase tracking-wider">
-                  {stat.label}
-                </div>
-                <div className="font-sans text-[0.7rem] text-[#666059] font-light truncate">
-                  {stat.sub}
-                </div>
-              </div>
-            ))}
+      <section className="relative w-full bg-[#FAF7F2] py-10 sm:py-14 px-4 sm:px-8 lg:px-12 border-y border-[#E8E2D6] overflow-hidden">
+        {/* Subtle Background Architectural Ambience & Blueprint Grid */}
+        <div 
+          className="absolute inset-0 opacity-[0.035] pointer-events-none"
+          style={{
+            backgroundImage: 'radial-gradient(circle at 1px 1px, #1a1a1a 1px, transparent 0)',
+            backgroundSize: '24px 24px'
+          }}
+        />
+        <div className="absolute top-0 right-1/4 w-[500px] h-[250px] bg-accent/8 rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute bottom-0 left-10 w-[400px] h-[200px] bg-accent/5 rounded-full blur-[100px] pointer-events-none" />
+
+        <div className="max-w-[94rem] mx-auto w-full relative z-10">
+          {/* Section Header Strip - Centered */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="flex flex-col items-center justify-center text-center max-w-3xl mx-auto mb-10 pb-6 border-b border-[#E8E2D6]"
+          >
+            <div className="flex items-center justify-center space-x-2.5 mb-2.5">
+              <span className="w-6 sm:w-10 h-[1.5px] bg-accent" />
+              <span className="font-mono text-[0.68rem] sm:text-xs tracking-[0.3em] text-accent uppercase font-bold flex items-center gap-1.5">
+                <Sparkles className="w-3.5 h-3.5 text-accent" />
+                Studio Benchmarks &amp; Scale
+              </span>
+              <span className="w-6 sm:w-10 h-[1.5px] bg-accent" />
+            </div>
+
+            <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-normal text-[#1A1A1A] tracking-tight mb-2.5 leading-[1.2]">
+              Architectural Metrics of <span className="italic font-light text-accent">Proven Excellence.</span>
+            </h2>
+
+            <p className="font-sans text-xs sm:text-sm text-[#736B62] max-w-xl font-light leading-relaxed">
+              Every millimeter, natural material, and bespoke space engineered to deliver enduring spatial value and quiet sophistication.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+            {STATS_BAR.map((stat, sIdx) => {
+              const IconComponent = stat.icon;
+              return (
+                <motion.div
+                  key={stat.id || sIdx}
+                  initial={{ opacity: 0, y: 28 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-40px' }}
+                  transition={{ 
+                    duration: 0.6, 
+                    delay: sIdx * 0.1, 
+                    ease: [0.16, 1, 0.3, 1] 
+                  }}
+                  whileHover={{ 
+                    y: -6,
+                    transition: { duration: 0.3, ease: 'easeOut' }
+                  }}
+                  className="group relative bg-white/85 hover:bg-white backdrop-blur-md rounded-2xl p-5 sm:p-6 lg:p-7 border border-[#E8E2D6] hover:border-accent/40 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_35px_rgba(138,109,84,0.12)] transition-all duration-500 overflow-hidden flex flex-col justify-between cursor-default"
+                >
+                  {/* Top Animated Gold Accent Strip */}
+                  <div className="absolute top-0 left-0 right-0 h-[2.5px] bg-gradient-to-r from-accent/40 via-accent to-accent/40 transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-out" />
+
+                  {/* Top Bar: Watermark Badge & Icon */}
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center gap-2">
+                      <span className="font-mono text-[0.68rem] font-bold text-accent tracking-wider bg-accent/10 px-2 py-0.5 rounded-md border border-accent/20">
+                        {stat.id}
+                      </span>
+                      <span className="font-sans text-[0.62rem] uppercase tracking-[0.2em] text-[#8C8276] font-semibold">
+                        {stat.badge}
+                      </span>
+                    </div>
+
+                    <div className="w-8 h-8 rounded-xl bg-[#FAF7F2] border border-[#E8E2D6] group-hover:border-accent/30 group-hover:bg-accent group-hover:text-white text-accent flex items-center justify-center transition-all duration-500 shadow-sm group-hover:rotate-6">
+                      <IconComponent className="w-3.5 h-3.5" />
+                    </div>
+                  </div>
+
+                  {/* Main Value */}
+                  <div className="my-1">
+                    <div className="font-serif text-3xl sm:text-4xl lg:text-[2.5rem] font-normal tracking-tight text-[#161412] group-hover:text-accent transition-colors duration-300 leading-none">
+                      <AnimatedCounter
+                        end={stat.end}
+                        decimals={stat.decimals}
+                        suffix={stat.suffix}
+                        duration={2.2}
+                      />
+                    </div>
+                  </div>
+
+                  {/* Label & Description */}
+                  <div className="mt-2.5">
+                    <h4 className="font-sans text-[0.72rem] sm:text-xs font-bold text-accent uppercase tracking-[0.22em] mb-1 leading-snug">
+                      {stat.label}
+                    </h4>
+                    <p className="font-sans text-xs text-[#6B635B] font-light leading-relaxed">
+                      {stat.sub}
+                    </p>
+                  </div>
+
+                  {/* Bottom Hairline Highlight */}
+                  <div className="mt-4 pt-3 border-t border-[#F2ECE1] flex items-center justify-between text-[0.62rem] font-mono text-[#A89F93]">
+                    <span className="tracking-widest uppercase">INCHES ATELIER</span>
+                    <span className="w-1.5 h-1.5 rounded-full bg-accent/30 group-hover:bg-accent transition-colors duration-300" />
+                  </div>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
