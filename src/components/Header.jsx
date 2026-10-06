@@ -22,6 +22,7 @@ const Header = () => {
 
     const navLinks = [
         { name: 'Home', href: '/', isRoute: true },
+        { name: 'About us', href: '/aboutus', isRoute: true },
         { name: 'Philosophy', href: '/philosophy', isRoute: true },
         { name: 'Expertise', href: '/expertise', isRoute: true },
         { name: 'Gallery', href: '/gallery', isRoute: true },

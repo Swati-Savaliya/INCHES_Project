@@ -6,6 +6,7 @@ import ExpertisePage from './pages/ExpertisePage';
 import GalleryPage from './pages/GalleryPage';
 import ReviewsPage from './pages/ReviewsPage';
 import AdminReviewsPage from './pages/AdminReviewsPage';
+import AboutUsPage from './pages/AboutUsPage';
 
 import './App.css';
 
@@ -20,6 +21,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/aboutus" element={<AboutUsPage />} />
         <Route path="/philosophy" element={<PhilosophyPage />} />
         <Route path="/expertise" element={<ExpertisePage />} />
         <Route path="/gallery" element={<GalleryPage />} />

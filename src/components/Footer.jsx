@@ -111,6 +111,9 @@ const Footer = () => {
             </h4>
             <ul className="space-y-3 font-sans text-xs text-surface/70">
               <li>
+                <Link to="/aboutus" className="hover:text-accent transition-colors">About Us</Link>
+              </li>
+              <li>
                 <Link to="/philosophy" className="hover:text-accent transition-colors">Philosophy</Link>
               </li>
               <li>
