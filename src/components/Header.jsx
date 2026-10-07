@@ -23,16 +23,15 @@ const Header = () => {
     const navLinks = [
         { name: 'Home', href: '/', isRoute: true },
         { name: 'About us', href: '/aboutus', isRoute: true },
-        { name: 'Philosophy', href: '/philosophy', isRoute: true },
         { name: 'Expertise', href: '/expertise', isRoute: true },
         { name: 'Gallery', href: '/gallery', isRoute: true },
         { name: 'Reviews', href: '/reviews', isRoute: true },
-        { name: 'Contact', href: '/#contact', isRoute: false },
+        { name: 'Contact', href: '/contact', isRoute: true },
     ];
 
     const handleRouteClick = (href) => {
         setIsOpen(false);
-        if (href === '/' && location.pathname === '/') {
+        if (location.pathname === href) {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
     };
@@ -59,8 +58,8 @@ const Header = () => {
                 <div className="flex justify-between items-center h-20">
 
                     {/* Logo Section */}
-                    <Link 
-                        to="/" 
+                    <Link
+                        to="/"
                         onClick={() => handleRouteClick('/')}
                         className="flex-shrink-0 flex items-center cursor-pointer group"
                     >
@@ -122,10 +121,10 @@ const Header = () => {
 
                     {/* CTA Button */}
                     <div className="hidden lg:flex items-center space-x-8">
-                        <a
-                            href="/#consult"
-                            onClick={(e) => handleAnchorClick(e, '/#consult', false)}
-                            className="group flex items-center px-6 py-2.5 bg-transparent border border-primary text-primary hover:bg-primary hover:text-surface transition-all duration-500 font-sans text-[0.65rem] tracking-[0.25em] uppercase overflow-hidden relative"
+                        <Link
+                            to="/contact"
+                            onClick={() => handleRouteClick('/contact')}
+                            className="group flex items-center px-6 py-2.5 bg-transparent border border-primary text-primary hover:bg-primary hover:text-surface transition-all duration-500 font-sans text-[0.65rem] tracking-[0.25em] uppercase overflow-hidden relative cursor-pointer"
                         >
                             <span className="relative z-10 flex items-center">
                                 Consult Now
@@ -133,7 +132,7 @@ const Header = () => {
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                                 </svg>
                             </span>
-                        </a>
+                        </Link>
                     </div>
 
                     {/* Mobile menu button */}
@@ -184,16 +183,16 @@ const Header = () => {
                         )
                     ))}
                     <div className="w-full pt-6 flex justify-center">
-                        <a
-                            href="/#consult"
-                            className="flex justify-center items-center w-3/4 px-8 py-4 border border-primary bg-primary text-surface transition-all duration-300 font-sans text-xs tracking-[0.2em] uppercase"
-                            onClick={(e) => handleAnchorClick(e, '/#consult', false)}
+                        <Link
+                            to="/contact"
+                            className="flex justify-center items-center w-3/4 px-8 py-4 border border-primary bg-primary text-surface transition-all duration-300 font-sans text-xs tracking-[0.2em] uppercase cursor-pointer"
+                            onClick={() => handleRouteClick('/contact')}
                         >
                             Consult Now
                             <svg className="w-4 h-4 ml-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                             </svg>
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </div>

@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage';
-import PhilosophyPage from './pages/PhilosophyPage';
 import ExpertisePage from './pages/ExpertisePage';
 import GalleryPage from './pages/GalleryPage';
 import ReviewsPage from './pages/ReviewsPage';
 import AdminReviewsPage from './pages/AdminReviewsPage';
 import AboutUsPage from './pages/AboutUsPage';
+import ContactPage from './pages/ContactPage';
 
 import './App.css';
 
@@ -22,10 +22,10 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/aboutus" element={<AboutUsPage />} />
-        <Route path="/philosophy" element={<PhilosophyPage />} />
         <Route path="/expertise" element={<ExpertisePage />} />
         <Route path="/gallery" element={<GalleryPage />} />
         <Route path="/reviews" element={<ReviewsPage />} />
+        <Route path="/contact" element={<ContactPage />} />
         
         {/* Secret Dedicated Admin Portal Route */}
         <Route path="/admin_portal" element={<AdminReviewsPage />} />

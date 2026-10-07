@@ -41,10 +41,10 @@ const About = () => {
 
             <div className="flex flex-col sm:flex-row items-center gap-4">
               <Link 
-                to="/philosophy"
+                to="/aboutus"
                 className="inline-block px-8 py-3 bg-primary text-[#EFECE6] font-sans text-xs tracking-[0.2em] uppercase hover:bg-accent transition-all duration-500 text-center"
               >
-                Discover Our Philosophy
+                Discover Our Story
               </Link>
               <a 
                 href="#contact"

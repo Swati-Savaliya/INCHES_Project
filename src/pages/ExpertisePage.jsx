@@ -20,7 +20,6 @@ import {
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import SpatialAnatomyStudio from './SpatialAnatomyStudio';
-import ProcessRoadmap from './ProcessRoadmap';
 import MaterialAtelier from './MaterialAtelier';
 
 const EXPERTISE_BANNER_DATA = [
@@ -694,9 +693,6 @@ const ExpertisePage = () => {
         <SpatialAnatomyStudio />
       </div>
 
-      {/* ===================== PROCESS ROADMAP & TIMELINE (LIGHT) ===================== */}
-      <ProcessRoadmap />
-
       {/* ===================== MATERIAL ATELIER (DARK) ===================== */}
       <MaterialAtelier />
 
@@ -760,10 +756,10 @@ const ExpertisePage = () => {
                 <ArrowUpRight className="w-3.5 h-3.5" />
               </a>
               <Link
-                to="/philosophy"
+                to="/aboutus"
                 className="px-6 py-3 bg-[#FAF6EE] hover:bg-white border border-primary/15 hover:border-accent text-primary font-sans text-xs tracking-[0.18em] uppercase font-semibold rounded-xl shadow-xs transition-all"
               >
-                Read Studio Philosophy
+                About Our Studio
               </Link>
             </div>
 
