@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowUpRight, MapPin, Mail, MessageCircle } from 'lucide-react';
+import { ArrowUpRight, MapPin, Mail } from 'lucide-react';
+import { FaWhatsapp, FaInstagram, FaFacebookF, FaLinkedinIn } from 'react-icons/fa6';
 
 const Footer = () => {
   const scrollToTop = () => {
@@ -49,27 +50,27 @@ const Footer = () => {
                 href="https://wa.me/919702763876?text=Hello%20Nilesh%20Donga,%20I%20would%20like%20to%20consult%20for%20an%20interior%20couture%20project."
                 target="_blank"
                 rel="noreferrer"
-                className="w-10 h-10 rounded-full bg-[#25D366]/15 hover:bg-[#25D366] border border-[#25D366]/40 hover:border-[#25D366] flex items-center justify-center text-[#25D366] hover:text-white transition-all duration-300 hover:scale-110 shadow-sm hover:shadow-[0_0_18px_rgba(37,211,102,0.45)] relative group/wa1"
+                className="w-10 h-10 rounded-full bg-[#25D366] text-white flex items-center justify-center shadow-md relative transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-105 hover:shadow-[0_8px_20px_rgba(37,211,102,0.45)] active:scale-95"
                 aria-label="WhatsApp Studio"
                 title="WhatsApp: Nilesh Donga (Founder)"
               >
-                <MessageCircle className="w-4 h-4" />
-                <span className="absolute -top-1 -right-1 w-3.5 h-3.5 bg-[#25D366] text-[#0A0A0A] font-bold text-[0.55rem] rounded-full flex items-center justify-center border border-[#0A0A0A]">
+                <FaWhatsapp className="w-5 h-5" />
+                <span className="absolute -top-1 -right-1 w-4 h-4 bg-[#0A0A0A] text-[#25D366] font-bold text-[0.6rem] rounded-full flex items-center justify-center border border-[#25D366] transition-transform duration-300 group-hover:scale-110">
                   1
                 </span>
               </a>
 
-              {/* WhatsApp 2 - Ar. Bhavik Savaliya / Architectural Line */}
+              {/* WhatsApp 2 - Jignesh Mistry (CEO) */}
               <a
-                href="https://wa.me/919702763876?text=Hello%20Ar.%20Bhavik%20Savaliya,%20I%20would%20like%20to%20consult%20regarding%20architectural%20layout."
+                href="https://wa.me/919699228269?text=Hello%20Jignesh%20Mistry,%20I%20would%20like%20to%20consult%20regarding%20an%20architectural%20project."
                 target="_blank"
                 rel="noreferrer"
-                className="w-10 h-10 rounded-full bg-[#25D366]/15 hover:bg-[#25D366] border border-[#25D366]/40 hover:border-[#25D366] flex items-center justify-center text-[#25D366] hover:text-white transition-all duration-300 hover:scale-110 shadow-sm hover:shadow-[0_0_18px_rgba(37,211,102,0.45)] relative group/wa2"
-                aria-label="WhatsApp Architecture"
-                title="WhatsApp: Ar. Bhavik Savaliya (Co-Founder)"
+                className="w-10 h-10 rounded-full bg-[#25D366] text-white flex items-center justify-center shadow-md relative transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-105 hover:shadow-[0_8px_20px_rgba(37,211,102,0.45)] active:scale-95"
+                aria-label="WhatsApp Jignesh Mistry"
+                title="WhatsApp: Jignesh Mistry (CEO)"
               >
-                <MessageCircle className="w-4 h-4" />
-                <span className="absolute -top-1 -right-1 w-3.5 h-3.5 bg-[#25D366] text-[#0A0A0A] font-bold text-[0.55rem] rounded-full flex items-center justify-center border border-[#0A0A0A]">
+                <FaWhatsapp className="w-5 h-5" />
+                <span className="absolute -top-1 -right-1 w-4 h-4 bg-[#0A0A0A] text-[#25D366] font-bold text-[0.6rem] rounded-full flex items-center justify-center border border-[#25D366] transition-transform duration-300 group-hover:scale-110">
                   2
                 </span>
               </a>
@@ -79,15 +80,11 @@ const Footer = () => {
                 href="https://instagram.com"
                 target="_blank"
                 rel="noreferrer"
-                className="w-10 h-10 rounded-full bg-[#E1306C]/15 hover:bg-gradient-to-tr hover:from-[#F58529] hover:via-[#DD2A7B] hover:to-[#8134AF] border border-[#E1306C]/40 hover:border-transparent flex items-center justify-center text-[#E1306C] hover:text-white transition-all duration-300 hover:scale-110 shadow-sm hover:shadow-[0_0_18px_rgba(225,48,108,0.5)]"
+                className="w-10 h-10 rounded-full bg-gradient-to-tr from-[#F58529] via-[#DD2A7B] to-[#8134AF] text-white flex items-center justify-center shadow-md transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-105 hover:shadow-[0_8px_20px_rgba(221,42,123,0.45)] active:scale-95"
                 aria-label="Instagram"
                 title="Follow on Instagram"
               >
-                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
-                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-                  <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
-                </svg>
+                <FaInstagram className="w-4.5 h-4.5" />
               </a>
 
               {/* Facebook */}
@@ -95,13 +92,11 @@ const Footer = () => {
                 href="https://facebook.com"
                 target="_blank"
                 rel="noreferrer"
-                className="w-10 h-10 rounded-full bg-[#1877F2]/15 hover:bg-[#1877F2] border border-[#1877F2]/40 hover:border-[#1877F2] flex items-center justify-center text-[#1877F2] hover:text-white transition-all duration-300 hover:scale-110 shadow-sm hover:shadow-[0_0_18px_rgba(24,119,242,0.45)]"
+                className="w-10 h-10 rounded-full bg-[#1877F2] text-white flex items-center justify-center shadow-md transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-105 hover:shadow-[0_8px_20px_rgba(24,119,242,0.45)] active:scale-95"
                 aria-label="Facebook"
                 title="Follow on Facebook"
               >
-                <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                </svg>
+                <FaFacebookF className="w-4 h-4" />
               </a>
 
               {/* LinkedIn */}
@@ -109,13 +104,11 @@ const Footer = () => {
                 href="https://linkedin.com"
                 target="_blank"
                 rel="noreferrer"
-                className="w-10 h-10 rounded-full bg-[#0A66C2]/15 hover:bg-[#0A66C2] border border-[#0A66C2]/40 hover:border-[#0A66C2] flex items-center justify-center text-[#0A66C2] hover:text-white transition-all duration-300 hover:scale-110 shadow-sm hover:shadow-[0_0_18px_rgba(10,102,194,0.45)]"
+                className="w-10 h-10 rounded-full bg-[#0A66C2] text-white flex items-center justify-center shadow-md transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-105 hover:shadow-[0_8px_20px_rgba(10,102,194,0.45)] active:scale-95"
                 aria-label="LinkedIn"
                 title="Connect on LinkedIn"
               >
-                <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                  <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-                </svg>
+                <FaLinkedinIn className="w-4 h-4" />
               </a>
             </div>
           </div>

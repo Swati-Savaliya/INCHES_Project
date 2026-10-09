@@ -541,45 +541,50 @@ export default function ReviewsPage() {
   const [faqOpen, setFaqOpen] = useState(0);
 
   // Dynamic reviews list with localStorage & Admin deletion persistence support
-  const [reviewsList, setReviewsList] = useState(() => {
+  const loadReviewsFromStorage = () => {
     try {
-      const deletedIds = JSON.parse(localStorage.getItem('inches_deleted_review_ids') || '[]');
+      const deletedIds = JSON.parse(localStorage.getItem('inches_deleted_review_ids') || '[]').map(String);
       const saved = localStorage.getItem('inches_dynamic_reviews');
       let combined = REVIEWS_DATA;
       if (saved) {
         const parsed = JSON.parse(saved);
         if (Array.isArray(parsed) && parsed.length > 0) {
-          combined = [...parsed, ...REVIEWS_DATA];
+          const parsedIds = new Set(parsed.map((p) => String(p.id)));
+          combined = [...parsed, ...REVIEWS_DATA.filter((r) => !parsedIds.has(String(r.id)))];
         }
       }
-      return combined.filter((r) => !deletedIds.includes(r.id));
+      const activeList = combined.filter((r) => !deletedIds.includes(String(r.id)));
+      setReviewsList(activeList);
+      return activeList;
+    } catch (err) {
+      console.error(err);
+      setReviewsList(REVIEWS_DATA);
+      return REVIEWS_DATA;
+    }
+  };
+
+  const [reviewsList, setReviewsList] = useState(() => {
+    try {
+      const deletedIds = JSON.parse(localStorage.getItem('inches_deleted_review_ids') || '[]').map(String);
+      const saved = localStorage.getItem('inches_dynamic_reviews');
+      let combined = REVIEWS_DATA;
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          const parsedIds = new Set(parsed.map((p) => String(p.id)));
+          combined = [...parsed, ...REVIEWS_DATA.filter((r) => !parsedIds.has(String(r.id)))];
+        }
+      }
+      return combined.filter((r) => !deletedIds.includes(String(r.id)));
     } catch (err) {
       console.error(err);
       return REVIEWS_DATA;
     }
   });
 
-  // Function to reload reviews from localStorage
-  const loadReviewsFromStorage = () => {
-    try {
-      const deletedIds = JSON.parse(localStorage.getItem('inches_deleted_review_ids') || '[]');
-      const saved = localStorage.getItem('inches_dynamic_reviews');
-      let combined = REVIEWS_DATA;
-      if (saved) {
-        const parsed = JSON.parse(saved);
-        if (Array.isArray(parsed) && parsed.length > 0) {
-          combined = [...parsed, ...REVIEWS_DATA];
-        }
-      }
-      setReviewsList(combined.filter((r) => !deletedIds.includes(r.id)));
-    } catch (err) {
-      console.error(err);
-      setReviewsList(REVIEWS_DATA);
-    }
-  };
-
   // Listen for storage events or custom review updates
   useEffect(() => {
+    loadReviewsFromStorage();
     const handleUpdate = () => {
       loadReviewsFromStorage();
     };

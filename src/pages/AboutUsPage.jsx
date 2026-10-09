@@ -35,6 +35,7 @@ const PARTNERS = [
   {
     id: 'nilesh',
     name: 'Nilesh Donga',
+    phone: '919702763876',
     role: 'Founder',
     designationBadge: 'FOUNDER',
     discipline: 'Tactile Materiality & Sensorial Styling',
@@ -52,23 +53,24 @@ const PARTNERS = [
     whatsappMsg: 'Hello%20Nilesh%20Donga,%20I%20would%20like%20to%20consult%20regarding%20interior%20styling%20and%20materials.'
   },
   {
-    id: 'bhavik',
-    name: 'Ar. Bhavik Savaliya',
-    role: 'Co-Founder',
-    designationBadge: 'CO-FOUNDER',
+    id: 'jignesh',
+    name: 'Jignesh Mistry',
+    phone: '919699228269',
+    role: 'CEO',
+    designationBadge: 'CEO',
     discipline: 'Spatial Geometry & Structural Flow',
-    experience: 'Co-Founder • B.Arch • 12+ Years Practice',
+    experience: 'CEO • B.Arch • 12+ Years Practice',
     portrait: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=1000', // Clear Front-Facing Male Architect
     philosophy: 'Calibrating golden proportions and daylight channels to engineer effortless spatial calm.',
     bio: [
-      'Serving as Co-Founder, Ar. Bhavik Savaliya brings architectural rigor, mathematical geometry, and structural harmony to every landmark project. Holding a Bachelor of Architecture with 12+ years of professional mastery, he governs the structural envelope and internal fluid dynamics.',
-      'Bhavik meticulously choreographs golden-ratio proportions (1.618), natural circadian lightwells, and clean minimalist volumes—ensuring that every residence achieves structural perfection, optimal spatial utility, and effortless architectural peace.'
+      'Serving as CEO, Jignesh Mistry brings architectural rigor, mathematical geometry, and structural harmony to every landmark project. Holding a Bachelor of Architecture with 12+ years of professional mastery, he governs the structural envelope and internal fluid dynamics.',
+      'Jignesh meticulously choreographs golden-ratio proportions (1.618), natural circadian lightwells, and clean minimalist volumes—ensuring that every residence achieves structural perfection, optimal spatial utility, and effortless architectural peace.'
     ],
-    seal: 'CO-FOUNDER',
-    signatureCode: 'B.S. CO-FOUNDER // 02',
+    seal: 'CEO',
+    signatureCode: 'J.M. CEO // 02',
     portalStyle: 'rounded-t-[140px] rounded-b-[24px]',
     frameOffset: 'rounded-t-[148px] rounded-b-[32px]',
-    whatsappMsg: 'Hello%20Ar.%20Bhavik,%20I%20would%20like%20to%20consult%20on%20an%20architectural%20project.'
+    whatsappMsg: 'Hello%20Jignesh%20Mistry,%20I%20would%20like%20to%20consult%20on%20an%20architectural%20project.'
   }
 ];
 
@@ -76,7 +78,7 @@ const PARTNERS = [
 const SYNERGY_CARDS = [
   {
     phase: 'PHASE 01',
-    lead: 'AR. BHAVIK SAVALIYA',
+    lead: 'Jignesh Mistry',
     badge: 'ARCHITECTURAL CORE',
     title: 'Spatial Bones & Light Channels',
     desc: 'Engineering golden-ratio volumetrics (1.618), unobstructed sightlines, and circadian lightwells before finishes are chosen.',
@@ -114,7 +116,7 @@ const MILESTONES = [
     subtitle: 'FOUNDATION OF INCHES',
     tag: 'Surat, Gujarat',
     icon: Compass,
-    desc: 'Bhavik and Nilesh founded INCHES to bridge architectural structure with tactile interior soul.'
+    desc: 'Jignesh and Nilesh founded INCHES to bridge architectural structure with tactile interior soul.'
   },
   {
     year: '2017',
@@ -220,7 +222,7 @@ const AboutUsPage = () => {
               </h1>
 
               <p className="font-sans text-sm sm:text-base text-surface/80 leading-relaxed max-w-xl font-light">
-                INCHES is led by <strong className="text-white font-medium">Nilesh Donga</strong> and <strong className="text-white font-medium">Ar. Bhavik Savaliya</strong>—fusing tactile interior warmth with architectural proportion.
+                INCHES is led by <strong className="text-white font-medium">Nilesh Donga</strong> and <strong className="text-white font-medium">Jignesh Mistry</strong>—fusing tactile interior warmth with architectural proportion.
               </p>
             </motion.div>
 
@@ -371,7 +373,7 @@ const AboutUsPage = () => {
                 {/* Direct WhatsApp Consultation Button */}
                 <div className="pt-2">
                   <a
-                    href={`https://wa.me/919702763876?text=${partner.whatsappMsg}`}
+                    href={`https://wa.me/${partner.phone || '919702763876'}?text=${partner.whatsappMsg}`}
                     target="_blank"
                     rel="noreferrer"
                     className="w-full py-3.5 px-6 rounded-xl bg-primary hover:bg-accent text-white font-sans text-xs tracking-[0.2em] uppercase font-bold flex items-center justify-center gap-2 transition-all duration-300 shadow-md hover:shadow-lg cursor-pointer"
@@ -670,7 +672,7 @@ const AboutUsPage = () => {
           </h2>
 
           <p className="font-sans text-xs sm:text-sm text-primary/75 max-w-lg mx-auto mb-8 leading-relaxed font-normal">
-            Direct private appointments with Nilesh Donga &amp; Ar. Bhavik Savaliya for upcoming luxury residential villas, penthouses, and bespoke architecture.
+            Direct private appointments with Nilesh Donga &amp; Jignesh Mistry for upcoming luxury residential villas, penthouses, and bespoke architecture.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">

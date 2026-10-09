@@ -399,8 +399,8 @@ export default function AdminReviewsPage() {
         const parsed = JSON.parse(savedTrash);
         if (Array.isArray(parsed) && parsed.length > 0) return parsed;
       }
-      const deletedIds = JSON.parse(localStorage.getItem('inches_deleted_review_ids') || '[]');
-      return DEFAULT_REVIEWS_DATA.filter((r) => deletedIds.includes(r.id));
+      const deletedIds = JSON.parse(localStorage.getItem('inches_deleted_review_ids') || '[]').map(String);
+      return DEFAULT_REVIEWS_DATA.filter((r) => deletedIds.includes(String(r.id)));
     } catch {
       return [];
     }
@@ -409,7 +409,7 @@ export default function AdminReviewsPage() {
   // Load and sync live reviews list from localStorage
   const loadReviewsFromStorage = () => {
     try {
-      const deletedIds = JSON.parse(localStorage.getItem('inches_deleted_review_ids') || '[]');
+      const deletedIds = JSON.parse(localStorage.getItem('inches_deleted_review_ids') || '[]').map(String);
       const savedPublic = localStorage.getItem('inches_dynamic_reviews');
       const savedPrivate = localStorage.getItem('inches_concierge_feedback');
       const savedTrash = localStorage.getItem('inches_trash_reviews');
@@ -430,13 +430,14 @@ export default function AdminReviewsPage() {
         const parsedTrash = JSON.parse(savedTrash);
         if (Array.isArray(parsedTrash)) trash = parsedTrash;
       } else {
-        trash = DEFAULT_REVIEWS_DATA.filter((r) => deletedIds.includes(r.id));
+        trash = DEFAULT_REVIEWS_DATA.filter((r) => deletedIds.includes(String(r.id)));
       }
       setDeletedReviews(trash);
 
       // All user submissions show at the top
-      const combined = [...userPub, ...userPriv, ...DEFAULT_REVIEWS_DATA];
-      setAllReviews(combined.filter((r) => !deletedIds.includes(r.id)));
+      const userIds = new Set([...userPub, ...userPriv].map((u) => String(u.id)));
+      const combined = [...userPub, ...userPriv, ...DEFAULT_REVIEWS_DATA.filter((d) => !userIds.has(String(d.id)))];
+      setAllReviews(combined.filter((r) => !deletedIds.includes(String(r.id))));
     } catch (err) {
       console.error(err);
       setAllReviews(DEFAULT_REVIEWS_DATA);
@@ -445,7 +446,7 @@ export default function AdminReviewsPage() {
 
   const [allReviews, setAllReviews] = useState(() => {
     try {
-      const deletedIds = JSON.parse(localStorage.getItem('inches_deleted_review_ids') || '[]');
+      const deletedIds = JSON.parse(localStorage.getItem('inches_deleted_review_ids') || '[]').map(String);
       const savedPublic = localStorage.getItem('inches_dynamic_reviews');
       const savedPrivate = localStorage.getItem('inches_concierge_feedback');
       
@@ -460,8 +461,9 @@ export default function AdminReviewsPage() {
         if (Array.isArray(parsedPriv)) userPriv = parsedPriv;
       }
       
-      const combined = [...userPub, ...userPriv, ...DEFAULT_REVIEWS_DATA];
-      return combined.filter((r) => !deletedIds.includes(r.id));
+      const userIds = new Set([...userPub, ...userPriv].map((u) => String(u.id)));
+      const combined = [...userPub, ...userPriv, ...DEFAULT_REVIEWS_DATA.filter((d) => !userIds.has(String(d.id)))];
+      return combined.filter((r) => !deletedIds.includes(String(r.id)));
     } catch (err) {
       console.error(err);
       return DEFAULT_REVIEWS_DATA;
@@ -617,30 +619,45 @@ export default function AdminReviewsPage() {
     try {
       // 1. Remove from deleted IDs
       const deleted = JSON.parse(localStorage.getItem('inches_deleted_review_ids') || '[]');
-      const updatedIds = deleted.filter((delId) => delId !== id);
+      const updatedIds = deleted.filter((delId) => String(delId) !== String(id));
       localStorage.setItem('inches_deleted_review_ids', JSON.stringify(updatedIds));
 
       // 2. Remove from trash reviews
       const savedTrash = localStorage.getItem('inches_trash_reviews');
       const parsedTrash = savedTrash ? JSON.parse(savedTrash) : [];
-      const updatedTrash = parsedTrash.filter((r) => r.id !== id);
+      const updatedTrash = parsedTrash.filter((r) => String(r.id) !== String(id));
       localStorage.setItem('inches_trash_reviews', JSON.stringify(updatedTrash));
       setDeletedReviews(updatedTrash);
 
-      // 3. If dynamic review or private feedback, restore to respective storage
-      if (itemToRestore.isUserCreated || itemToRestore.source) {
+      // 3. If dynamic review or custom submission, restore to respective dynamic storage
+      const isDefault = DEFAULT_REVIEWS_DATA.some((d) => String(d.id) === String(id));
+      if (!isDefault || itemToRestore.isUserCreated || itemToRestore.source) {
         if (itemToRestore.rating >= 4) {
           const savedPub = localStorage.getItem('inches_dynamic_reviews');
           const parsedPub = savedPub ? JSON.parse(savedPub) : [];
-          localStorage.setItem('inches_dynamic_reviews', JSON.stringify([itemToRestore, ...parsedPub.filter((r) => r.id !== id)]));
+          localStorage.setItem(
+            'inches_dynamic_reviews',
+            JSON.stringify([itemToRestore, ...parsedPub.filter((r) => String(r.id) !== String(id))])
+          );
         } else {
           const savedPriv = localStorage.getItem('inches_concierge_feedback');
           const parsedPriv = savedPriv ? JSON.parse(savedPriv) : [];
-          localStorage.setItem('inches_concierge_feedback', JSON.stringify([itemToRestore, ...parsedPriv.filter((r) => r.id !== id)]));
+          localStorage.setItem(
+            'inches_concierge_feedback',
+            JSON.stringify([itemToRestore, ...parsedPriv.filter((r) => String(r.id) !== String(id))])
+          );
         }
       }
 
+      // 4. Update Admin state immediately
+      setAllReviews((prev) => {
+        const exists = prev.some((r) => String(r.id) === String(id));
+        if (exists) return prev;
+        return [itemToRestore, ...prev];
+      });
+
       window.dispatchEvent(new Event('inches_review_updated'));
+      window.dispatchEvent(new CustomEvent('inches_review_updated', { detail: itemToRestore }));
       loadReviewsFromStorage();
       showToast(`✓ Review by "${itemToRestore.client}" restored successfully!`);
     } catch (err) {
@@ -654,39 +671,47 @@ export default function AdminReviewsPage() {
       const savedTrash = localStorage.getItem('inches_trash_reviews');
       const parsedTrash = savedTrash ? JSON.parse(savedTrash) : [];
 
-      // Restore user submissions
-      const userPubToRestore = parsedTrash.filter((r) => (r.isUserCreated || r.source) && r.rating >= 4);
-      const userPrivToRestore = parsedTrash.filter((r) => (r.isUserCreated || r.source) && r.rating < 4);
+      // Restore all non-default or custom public submissions
+      const nonDefaultPublic = parsedTrash.filter(
+        (r) => (!DEFAULT_REVIEWS_DATA.some((d) => String(d.id) === String(r.id)) || r.isUserCreated || r.source) && r.rating >= 4
+      );
+      const nonDefaultPrivate = parsedTrash.filter(
+        (r) => (!DEFAULT_REVIEWS_DATA.some((d) => String(d.id) === String(r.id)) || r.isUserCreated || r.source) && r.rating < 4
+      );
 
-      if (userPubToRestore.length > 0) {
+      if (nonDefaultPublic.length > 0) {
         const savedPub = localStorage.getItem('inches_dynamic_reviews');
         const parsedPub = savedPub ? JSON.parse(savedPub) : [];
-        const pubIds = userPubToRestore.map((r) => r.id);
+        const pubIds = new Set(nonDefaultPublic.map((r) => String(r.id)));
         localStorage.setItem(
           'inches_dynamic_reviews',
-          JSON.stringify([...userPubToRestore, ...parsedPub.filter((r) => !pubIds.includes(r.id))])
+          JSON.stringify([...nonDefaultPublic, ...parsedPub.filter((r) => !pubIds.has(String(r.id)))])
         );
       }
 
-      if (userPrivToRestore.length > 0) {
+      if (nonDefaultPrivate.length > 0) {
         const savedPriv = localStorage.getItem('inches_concierge_feedback');
         const parsedPriv = savedPriv ? JSON.parse(savedPriv) : [];
-        const privIds = userPrivToRestore.map((r) => r.id);
+        const privIds = new Set(nonDefaultPrivate.map((r) => String(r.id)));
         localStorage.setItem(
           'inches_concierge_feedback',
-          JSON.stringify([...userPrivToRestore, ...parsedPriv.filter((r) => !privIds.includes(r.id))])
+          JSON.stringify([...nonDefaultPrivate, ...parsedPriv.filter((r) => !privIds.has(String(r.id)))])
         );
       }
 
+      localStorage.setItem('inches_deleted_review_ids', '[]');
       localStorage.removeItem('inches_deleted_review_ids');
+      localStorage.setItem('inches_trash_reviews', '[]');
       localStorage.removeItem('inches_trash_reviews');
       setDeletedReviews([]);
+
       window.dispatchEvent(new Event('inches_review_updated'));
+      window.dispatchEvent(new CustomEvent('inches_review_updated'));
+      loadReviewsFromStorage();
+      showToast('✓ All deleted reviews have been restored to the live gallery!');
     } catch (err) {
       console.error(err);
     }
-    loadReviewsFromStorage();
-    showToast('✓ All deleted reviews have been restored to the live gallery!');
   };
 
   // Handle Admin Add New Review
