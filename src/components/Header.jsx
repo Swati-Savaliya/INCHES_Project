@@ -48,7 +48,7 @@ const Header = () => {
 
     return (
         <header
-            className={`w-full fixed top-0 z-50 transition-all duration-700 ease-in-out ${scrolled ? 'bg-surface/95 backdrop-blur-md shadow-sm py-2' : 'bg-surface py-5'
+            className={`w-full fixed top-0 z-50 transition-all duration-700 ease-in-out ${scrolled ? 'bg-surface/95 backdrop-blur-md shadow-sm py-2' : 'bg-surface py-3'
                 }`}
         >
             {/* Top thin line for extra elegance */}
@@ -61,27 +61,15 @@ const Header = () => {
                     <Link
                         to="/"
                         onClick={() => handleRouteClick('/')}
-                        className="flex-shrink-0 flex items-center cursor-pointer group"
+                        className="flex-shrink-0 flex items-center cursor-pointer py-1"
                     >
-                        {/* Elegant SVG Graphic representing an interior arch/lamp */}
-                        <svg width="40" height="50" viewBox="0 0 40 50" className="mr-3 transform group-hover:scale-105 transition-transform duration-500">
-                            <path d="M5,50 L5,20 C5,10 15,5 25,5 C35,5 35,25 35,35 L35,50" fill="none" stroke="#8A6D54" strokeWidth="1.5" />
-                            <circle cx="20" cy="18" r="4" fill="none" stroke="#1A1A1A" strokeWidth="1" />
-                            <line x1="20" y1="5" x2="20" y2="14" stroke="#1A1A1A" strokeWidth="1" />
-                            <path d="M0,50 L10,50" stroke="#1A1A1A" strokeWidth="1.5" />
+                        <svg
+                            viewBox="50 85 400 290"
+                            className="h-14 sm:h-16 lg:h-[68px] w-auto max-w-[280px] drop-shadow-sm"
+                            aria-label="INCHES Interiors"
+                        >
+                            <image href="/logo_img.png" width="500" height="500" />
                         </svg>
-                        <div className="flex flex-col items-center">
-                            <span className="font-serif text-3xl tracking-[0.25em] text-primary uppercase leading-none">
-                                Inches
-                            </span>
-                            <div className="flex items-center mt-2 w-full justify-center">
-                                <div className="w-12 h-[1px] bg-accent/60 mr-2"></div>
-                                <span className="font-sans text-[0.6rem] tracking-[0.4em] text-accent uppercase font-light">
-                                    Interiors
-                                </span>
-                                <div className="w-12 h-[1px] bg-accent/60 ml-2"></div>
-                            </div>
-                        </div>
                     </Link>
 
                     {/* Desktop Navigation */}

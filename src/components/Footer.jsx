@@ -22,21 +22,14 @@ const Footer = () => {
           {/* Brand Info (4 Cols) */}
           <div className="lg:col-span-4 flex flex-col justify-between">
             <div>
-              <Link to="/" className="flex items-center gap-3 mb-6 group inline-flex">
-                <svg width="34" height="42" viewBox="0 0 40 50" className="text-accent group-hover:scale-105 transition-transform duration-300">
-                  <path d="M5,50 L5,20 C5,10 15,5 25,5 C35,5 35,25 35,35 L35,50" fill="none" stroke="currentColor" strokeWidth="2" />
-                  <circle cx="20" cy="18" r="4" fill="none" stroke="currentColor" strokeWidth="1.5" />
-                  <line x1="20" y1="5" x2="20" y2="14" stroke="currentColor" strokeWidth="1.5" />
-                  <path d="M0,50 L10,50" stroke="currentColor" strokeWidth="2" />
+              <Link to="/" onClick={scrollToTop} className="flex items-center mb-6 group inline-flex" title="INCHES Interiors & Architecture">
+                <svg
+                  viewBox="50 85 400 290"
+                  className="w-44 sm:w-52 lg:w-[210px] h-auto drop-shadow-sm brightness-0 invert opacity-95 group-hover:opacity-100 group-hover:scale-[1.02] transition-all duration-300"
+                  aria-label="INCHES Interiors & Architecture"
+                >
+                  <image href="/logo_img.png" width="500" height="500" className="brightness-0 invert" />
                 </svg>
-                <div className="flex flex-col">
-                  <span className="font-serif text-3xl tracking-[0.25em] text-white uppercase leading-none">
-                    INCHES
-                  </span>
-                  <span className="font-sans text-[0.6rem] tracking-[0.45em] text-accent uppercase font-light mt-1">
-                    Interiors &amp; Architecture
-                  </span>
-                </div>
               </Link>
 
               <p className="font-sans text-xs sm:text-sm text-surface/60 leading-relaxed max-w-sm mb-6">
@@ -148,6 +141,9 @@ const Footer = () => {
             </h4>
             <ul className="space-y-3 font-sans text-xs text-surface/70">
               <li>
+                <Link to="/" onClick={scrollToTop} className="hover:text-accent transition-colors">Home</Link>
+              </li>
+              <li>
                 <Link to="/aboutus" className="hover:text-accent transition-colors">About Us</Link>
               </li>
               <li>
@@ -161,9 +157,6 @@ const Footer = () => {
               </li>
               <li>
                 <Link to="/contact" className="hover:text-accent transition-colors">Contact Us</Link>
-              </li>
-              <li>
-                <a href="/#transformation" className="hover:text-accent transition-colors">Before &amp; After</a>
               </li>
               <li>
                 <a href="/#visualizer" className="hover:text-accent transition-colors">Studio Visualizer</a>

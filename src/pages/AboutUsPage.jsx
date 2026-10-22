@@ -39,11 +39,13 @@ const PARTNERS = [
     role: 'Founder',
     designationBadge: 'FOUNDER',
     discipline: 'Tactile Materiality & Sensorial Styling',
-    experience: 'Founder • 10+ Years Practice',
-    portrait: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=1000', // Clear Front-Facing Male Interior Designer / Executive in Blazer
+    degree: 'PTD in Interior Designing & Decoration',
+    experience: 'Founder • 12+ Years Experience',
+    portrait: '/Founder_img.png', // INCHES Founder Nilesh Donga
     philosophy: 'Curating living textures and warm 2700K ambient grazes that embrace you before words do.',
+    specialties: ['Italian Lime Plaster', 'Fumed Oak Millwork', '2700K Lighting', 'Interior Couture'],
     bio: [
-      'As the visionary Founder of INCHES, Nilesh Donga leads the interior couture and tactile design philosophy of the studio. With over a decade of dedicated spatial practice, he transforms raw architectural shells into evocative, sensory living environments filled with enduring warmth.',
+      'As the visionary Founder of INCHES, Nilesh Donga leads the interior couture and tactile design philosophy of the studio. Holding a professional degree in PTD in Interior Designing & Decoration with 12+ years of dedicated spatial practice, he transforms raw architectural shells into evocative, sensory living environments filled with enduring warmth.',
       'His hallmark style blends hand-troweled Italian lime plaster, rich fumed oak millwork, artisanal fabrics, and precision-tuned 2700K ambient lighting—creating bespoke turnkey luxury residences that resonate deeply with both intimacy and timeless grace.'
     ],
     seal: 'FOUNDER',
@@ -59,11 +61,13 @@ const PARTNERS = [
     role: 'CEO',
     designationBadge: 'CEO',
     discipline: 'Spatial Geometry & Structural Flow',
-    experience: 'CEO • B.Arch • 12+ Years Practice',
-    portrait: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=1000', // Clear Front-Facing Male Architect
+    degree: 'PTD in Interior Designing & Decoration',
+    experience: 'CEO • 12+ Years Experience',
+    portrait: '/ceo_img.png', // INCHES CEO Jignesh Mistry
     philosophy: 'Calibrating golden proportions and daylight channels to engineer effortless spatial calm.',
+    specialties: ['1.618 Golden Ratio', 'Circadian Lightwells', 'Minimalist Volumes', 'Turnkey Precision'],
     bio: [
-      'Serving as CEO, Jignesh Mistry brings architectural rigor, mathematical geometry, and structural harmony to every landmark project. Holding a Bachelor of Architecture with 12+ years of professional mastery, he governs the structural envelope and internal fluid dynamics.',
+      'Serving as CEO, Jignesh Mistry brings architectural rigor, mathematical geometry, and structural harmony to every landmark project. Holding a professional degree in PTD in Interior Designing & Decoration with 12+ years of professional mastery, he governs the structural envelope and internal fluid dynamics.',
       'Jignesh meticulously choreographs golden-ratio proportions (1.618), natural circadian lightwells, and clean minimalist volumes—ensuring that every residence achieves structural perfection, optimal spatial utility, and effortless architectural peace.'
     ],
     seal: 'CEO',
@@ -289,31 +293,40 @@ const AboutUsPage = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: index * 0.15 }}
-                className="bg-white rounded-[36px] border border-[#E5DFD3] shadow-[0_20px_50px_rgba(138,109,84,0.09)] hover:shadow-[0_30px_70px_rgba(138,109,84,0.18)] hover:border-accent/60 transition-all duration-500 p-6 sm:p-8 flex flex-col justify-between group"
+                className="relative bg-gradient-to-b from-white via-[#FCFAF7] to-[#F8F4EC] rounded-[32px] sm:rounded-[36px] border border-[#E5DFD4] hover:border-accent/70 shadow-[0_16px_40px_rgba(138,109,84,0.08)] hover:shadow-[0_24px_55px_rgba(138,109,84,0.16)] transition-all duration-700 p-5 sm:p-6 flex flex-col justify-between group overflow-hidden"
               >
-                <div>
+                {/* Background Ambient Radial Glow on Hover */}
+                <div className="absolute -top-24 -right-24 w-52 h-52 bg-accent/8 rounded-full blur-3xl pointer-events-none group-hover:bg-accent/20 transition-all duration-700" />
+
+                <div className="relative z-10">
+
+
 
                   {/* ================= DISTINCT SCULPTURAL ARCHWAY IMAGE BOX ================= */}
-                  <div className="relative w-full pt-4 pb-2 flex justify-center">
+                  <div className="relative w-full pt-2 pb-2 flex justify-center">
 
-                    {/* Double Floating Golden Wireframe */}
-                    <div className={`relative w-[92%] sm:w-[88%] aspect-[4/5] ${partner.portalStyle} p-2 bg-[#F7F4EE] border-2 border-accent/40 shadow-[0_20px_45px_rgba(138,109,84,0.18)] group-hover:border-accent group-hover:shadow-[0_25px_60px_rgba(138,109,84,0.3)] transition-all duration-500`}>
+                    {/* Floating Golden Architectural Portal */}
+                    <div className={`relative w-[94%] sm:w-[90%] max-w-[370px] aspect-[4/4.5] ${partner.portalStyle} p-2 bg-[#F6F2EA] border-2 border-accent/40 shadow-[0_18px_38px_rgba(138,109,84,0.16)] group-hover:border-accent group-hover:shadow-[0_26px_58px_rgba(138,109,84,0.26)] transition-all duration-500`}>
 
                       {/* Inner Portal Image Container */}
-                      <div className={`relative w-full h-full ${partner.portalStyle} overflow-hidden bg-black shadow-inner`}>
+                      <div className={`relative w-full h-full ${partner.portalStyle} overflow-hidden bg-[#1E1A16] shadow-inner`}>
 
-                        {/* 100% Clear Face Photo */}
+                        {/* High-definition portrait */}
                         <img
                           src={partner.portrait}
                           alt={partner.name}
-                          className="w-full h-full object-cover object-top grayscale contrast-110 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 ease-out"
+                          className="w-full h-full object-cover object-top contrast-[1.04] group-hover:scale-105 transition-all duration-700 ease-out"
                         />
 
-                        {/* PROMINENT HIGHLIGHTED DESIGNATION RIBBON ACROSS BASE */}
-                        <div className="absolute bottom-3 left-3 right-3 z-20 p-2.5 rounded-xl bg-gradient-to-r from-accent via-[#6e533d] to-accent text-white shadow-[0_8px_25px_rgba(138,109,84,0.6)] border border-white/30 backdrop-blur-md text-center">
-                          <span className="font-sans text-[0.68rem] sm:text-xs font-bold uppercase tracking-[0.22em] flex items-center justify-center gap-1.5 drop-shadow-sm">
-                            <Sparkles className="w-3.5 h-3.5 text-yellow-300" />
+                        {/* Warm bottom shadow vignette for badge legibility */}
+                        <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/70 via-black/25 to-transparent pointer-events-none" />
+
+                        {/* PROMINENT HAUTE-COUTURE DESIGNATION BADGE */}
+                        <div className="absolute bottom-2 left-2 right-2 z-20 py-1.5 px-3 rounded-lg bg-gradient-to-r from-[#1E1915]/95 via-[#30261E]/95 to-[#1E1915]/95 text-white shadow-[0_8px_20px_rgba(0,0,0,0.5)] border border-amber-300/40 backdrop-blur-md text-center">
+                          <span className="font-sans text-[0.66rem] font-bold uppercase tracking-[0.22em] text-amber-200 flex items-center justify-center gap-1.5 drop-shadow-sm">
+                            <Sparkles className="w-3 h-3 text-amber-400 shrink-0" />
                             <span>{partner.designationBadge}</span>
+                            <Sparkles className="w-3 h-3 text-amber-400 shrink-0" />
                           </span>
                         </div>
 
@@ -327,39 +340,70 @@ const AboutUsPage = () => {
                   </div>
 
                   {/* ================= DETAILS CONTAINER BELOW IMAGE ================= */}
-                  <div className="pt-5 sm:pt-6">
+                  <div className="pt-2.5 sm:pt-3">
 
                     {/* Name & Discipline */}
-                    <div className="mb-3 text-center sm:text-left">
-                      <span className="font-sans text-[0.65rem] tracking-[0.2em] text-accent uppercase font-bold block mb-1">
-                        {partner.discipline}
-                      </span>
-                      <h3 className="font-serif text-2xl sm:text-3xl text-primary font-medium leading-none">
+                    <div className="mb-2.5 text-center sm:text-left">
+                      <div className="inline-flex items-center gap-1.5 mb-0.5">
+                        <span className="w-3 h-[1.5px] bg-accent" />
+                        <span className="font-sans text-[0.62rem] sm:text-[0.65rem] tracking-[0.2em] text-accent uppercase font-bold">
+                          {partner.discipline}
+                        </span>
+                      </div>
+                      <h3 className="font-serif text-2xl sm:text-[1.7rem] text-primary font-medium leading-tight group-hover:text-accent transition-colors duration-300">
                         {partner.name}
                       </h3>
                     </div>
 
-                    {/* Experience Subtitle */}
-                    <div className="flex items-center justify-between pb-3.5 mb-4 border-b border-primary/10">
-                      <div className="flex items-center gap-2 text-[0.72rem] font-mono text-primary/60 font-medium">
-                        <span className="w-2 h-2 rounded-full bg-accent" />
-                        <span>{partner.experience}</span>
+                    {/* Experience & Degree Credentials Row - Compact Side-by-Side Grid */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pb-2.5 mb-2.5 border-b border-primary/10">
+
+                      {/* Experience Stat Pill */}
+                      <div className="flex items-center gap-2 p-1.5 px-2.5 rounded-lg bg-white/90 border border-[#E8E2D6] shadow-[0_1px_4px_rgba(138,109,84,0.04)]">
+                        <div className="w-5 h-5 rounded-md bg-accent/10 border border-accent/25 flex items-center justify-center shrink-0">
+                          <Compass className="w-3 h-3 text-accent" />
+                        </div>
+                        <span className="text-[0.68rem] font-sans font-semibold text-primary/85 truncate" title={partner.experience}>
+                          {partner.experience}
+                        </span>
                       </div>
-                      <span className="text-[0.62rem] font-sans text-accent uppercase font-bold tracking-wider">
-                        Atelier Principal
-                      </span>
+
+                      {/* Degree Qualification Pill */}
+                      {partner.degree && (
+                        <div className="flex items-center gap-2 p-1.5 px-2.5 rounded-lg bg-gradient-to-r from-[#FAF7F2] to-[#F5EFE6] border border-accent/25 shadow-[0_1px_4px_rgba(138,109,84,0.04)]">
+                          <div className="w-5 h-5 rounded-md bg-accent/20 border border-accent/30 flex items-center justify-center shrink-0">
+                            <Award className="w-3 h-3 text-accent" />
+                          </div>
+                          <span className="text-[0.68rem] font-sans font-semibold text-primary/90 truncate" title={partner.degree}>
+                            {partner.degree}
+                          </span>
+                        </div>
+                      )}
+
                     </div>
 
                     {/* 1-Line Philosophy Quote */}
-                    <div className="p-4 rounded-2xl bg-[#FAF7F2] border-l-4 border-accent relative mb-5">
-                      <Quote className="w-5 h-5 text-accent/25 absolute top-3 right-3" />
-                      <p className="font-serif italic text-xs sm:text-sm text-primary/90 leading-relaxed pr-4">
+                    <div className="p-2.5 sm:p-3 rounded-xl bg-gradient-to-br from-[#FAF7F2] to-[#F5EFE6] border-l-3 border-accent relative mb-2.5 shadow-sm">
+                      <Quote className="w-4 h-4 text-accent/20 absolute top-2 right-2" />
+                      <p className="font-serif italic text-xs text-primary/90 leading-relaxed pr-4">
                         "{partner.philosophy}"
                       </p>
                     </div>
 
+                    {/* Curated Specialties Chips */}
+                    <div className="flex flex-wrap gap-1.5 mb-2.5">
+                      {partner.specialties?.map((spec, i) => (
+                        <span
+                          key={i}
+                          className="px-2 py-0.5 rounded-md bg-white border border-[#E7DFD3] text-[0.62rem] font-sans font-medium text-primary/75 tracking-wide shadow-sm"
+                        >
+                          {spec}
+                        </span>
+                      ))}
+                    </div>
+
                     {/* Expanded Profile Definition / Biography */}
-                    <div className="space-y-3.5 mb-6 text-primary/80 font-sans text-xs sm:text-[0.825rem] leading-relaxed">
+                    <div className="space-y-1.5 mb-4 text-primary/80 font-sans text-[0.78rem] leading-relaxed">
                       {partner.bio.map((paragraph, i) => (
                         <p key={i} className="text-primary/75">
                           {paragraph}
@@ -371,15 +415,22 @@ const AboutUsPage = () => {
                 </div>
 
                 {/* Direct WhatsApp Consultation Button */}
-                <div className="pt-2">
+                <div className="pt-1 relative z-10">
                   <a
                     href={`https://wa.me/${partner.phone || '919702763876'}?text=${partner.whatsappMsg}`}
                     target="_blank"
                     rel="noreferrer"
-                    className="w-full py-3.5 px-6 rounded-xl bg-primary hover:bg-accent text-white font-sans text-xs tracking-[0.2em] uppercase font-bold flex items-center justify-center gap-2 transition-all duration-300 shadow-md hover:shadow-lg cursor-pointer"
+                    className="group/btn relative w-full py-3 px-4 sm:px-5 rounded-xl bg-gradient-to-r from-[#1A1613] via-[#241F1A] to-[#1A1613] hover:from-accent hover:via-[#A7825C] hover:to-accent text-white font-sans text-xs tracking-[0.16em] uppercase font-bold flex items-center justify-between transition-all duration-500 shadow-[0_8px_18px_rgba(26,22,19,0.18)] hover:shadow-[0_12px_24px_rgba(167,130,92,0.32)] cursor-pointer overflow-hidden border border-white/10"
                   >
-                    <span>Consult With {partner.name.split(' ')[1] || partner.name}</span>
-                    <ArrowUpRight className="w-4 h-4" />
+                    <div className="flex items-center gap-2">
+                      <div className="w-5 h-5 rounded-full bg-emerald-500/20 border border-emerald-400/40 flex items-center justify-center">
+                        <MessageCircle className="w-3 h-3 text-emerald-400" />
+                      </div>
+                      <span>Consult With {partner.name}</span>
+                    </div>
+                    <div className="w-6 h-6 rounded-full bg-white/10 group-hover/btn:bg-white/20 flex items-center justify-center transition-transform duration-300 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5">
+                      <ArrowUpRight className="w-3.5 h-3.5 text-white" />
+                    </div>
                   </a>
                 </div>
 
